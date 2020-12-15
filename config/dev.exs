@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :lpc_manager, LpcManager.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "db-pwd",
   database: "lpc_manager_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
