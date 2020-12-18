@@ -18,6 +18,8 @@ defmodule LpcManagerWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+
+    resources "/races", RaceController
   end
 
   # Other scopes may use custom stacks.
