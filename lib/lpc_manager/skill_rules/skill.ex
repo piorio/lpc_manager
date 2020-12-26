@@ -14,7 +14,7 @@ defmodule LpcManager.SkillRules.Skill do
   def changeset(skill, attrs) do
     skill
     |> cast(attrs, [:name, :category, :description])
-    |> validate_required([:name, :category, :description])
+    |> validate_required([:name, :category])
     |> unique_constraint(:name)
   end
 end

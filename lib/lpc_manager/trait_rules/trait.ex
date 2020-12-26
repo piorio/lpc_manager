@@ -13,7 +13,7 @@ defmodule LpcManager.TraitRules.Trait do
   def changeset(trait, attrs) do
     trait
     |> cast(attrs, [:name, :description])
-    |> validate_required([:name, :description])
+    |> validate_required([:name])
     |> unique_constraint(:name)
   end
 end
