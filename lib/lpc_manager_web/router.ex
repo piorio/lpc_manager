@@ -20,6 +20,8 @@ defmodule LpcManagerWeb.Router do
     live "/", PageLive, :index
 
     resources "/races", RaceController
+    resources "/traits", TraitController
+    resources "/skills", SkillController
   end
 
   # Other scopes may use custom stacks.
