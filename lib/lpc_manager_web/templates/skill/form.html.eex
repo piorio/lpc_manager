@@ -5,19 +5,34 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
+  <div class="form-group">
+    <%= label f, :name, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= text_input f, :name, class: "form-control form-control-lg", placeholder: "Insert skill name" %>
+  </div>
   <%= error_tag f, :name %>
 
-  <%= label f, :category %>
-  <%= text_input f, :category %>
+  <div class="form-group">
+    <%= label f, :category, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= text_input f, :category, class: "form-control form-control-lg", placeholder: "Insert skill category" %>
+  </div>
   <%= error_tag f, :category %>
 
-  <%= label f, :description %>
-  <%= text_input f, :description %>
+  <div class="form-group">
+    <%= label f, :description, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= text_input f, :description, class: "form-control form-control-lg", placeholder: "Insert skill description" %>
+  </div>
   <%= error_tag f, :description %>
 
+  <br>
+
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "btn btn-primary"  %>
+    <%= link "Back", to: Routes.skill_path(@conn, :index), class: "btn btn-primary" %>
   </div>
 <% end %>
