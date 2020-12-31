@@ -1,5 +1,6 @@
 defmodule LpcManagerWeb.Router do
   use LpcManagerWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,8 +15,24 @@ defmodule LpcManagerWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug LpcManager.Plugs.EnsureRolePlug, :admin
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
+  end
+
   scope "/", LpcManagerWeb do
     pipe_through :browser
+
+    get "/", MainController, :index
+  end
+
+  scope "/admin", LpcManagerWeb do
+    pipe_through [:browser, :admin]
 
     live "/", PageLive, :index
 
@@ -40,7 +57,7 @@ defmodule LpcManagerWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
+      pipe_through [:browser, :admin]
       live_dashboard "/dashboard", metrics: LpcManagerWeb.Telemetry
     end
   end
