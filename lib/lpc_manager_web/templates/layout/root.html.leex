@@ -33,28 +33,30 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Switch account</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Super Admin</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <%= link to: Routes.race_path(@conn, :index), class: "dropdown-item" do%>
-                Race
-              <% end %>
-              <%= link to: Routes.skill_path(@conn, :index), class: "dropdown-item" do%>
-                Skill
-              <% end %>
-              <%= link to: Routes.trait_path(@conn, :index), class: "dropdown-item" do%>
-                Trait
-              <% end %>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sys admin</a>
-            <div class="dropdown-menu" aria-labelledby="sysadmindropdown">
-              <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "dropdown-item" %>
-              <% end %>
-            </div>
-          </li>
+          <%= if LpcManager.Users.is_admin?(@current_user) do %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Super Admin</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <%= link to: Routes.race_path(@conn, :index), class: "dropdown-item" do%>
+                  Race
+                <% end %>
+                <%= link to: Routes.skill_path(@conn, :index), class: "dropdown-item" do%>
+                  Skill
+                <% end %>
+                <%= link to: Routes.trait_path(@conn, :index), class: "dropdown-item" do%>
+                  Trait
+                <% end %>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sys admin</a>
+              <div class="dropdown-menu" aria-labelledby="sysadmindropdown">
+                <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+                  <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "dropdown-item" %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -63,11 +65,17 @@
         <ul class="navbar-nav dropdown mr-sm-4">
           <li class="nav-item">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown02">
-              <a class="dropdown-item" href="#">Login</a>
-              <a class="dropdown-item" href="#">Logout</a>
-              <a class="dropdown-item" href="#">Profile</a>
-            </div>
+            <%= if Pow.Plug.current_user(@conn) do %>
+              <div class="dropdown-menu" aria-labelledby="dropdown02">
+                <%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
+                <%= link "Profile", to: Routes.pow_registration_path(@conn, :edit), class: "dropdown-item" %>
+              </div>
+            <% else %>
+              <div class="dropdown-menu" aria-labelledby="dropdown02">
+                <%= link "Register", to: Routes.pow_registration_path(@conn, :new), class: "dropdown-item" %>
+                <%= link "Sign in", to: Routes.pow_session_path(@conn, :new), class: "dropdown-item" %>
+              </div>
+            <% end %>
           </li>
         </ul>
       </div>
@@ -82,7 +90,7 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="/">
                   <span data-feather="home"></span>
                   Home <span class="sr-only">(current)</span>
                 </a>
