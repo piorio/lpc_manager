@@ -18,3 +18,9 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+
+mix phx.gen.html RosterPlayerContext RosterPlayer roster_players min_quantity:integer max_quantity:integer position:string cost:integer movement_allowance:integer strength:integer agility:integer passing:integer armour_valuev:integer primary:array:string secondary:array:string
+
+mix phx.gen.schema LpcManagerWeb.RosterPlayerSkill roster_players_skills roster_player_id:references:roster_players skill_id:references:skills
+mix phx.gen.schema LpcManagerWeb.RosterPlayerTrait roster_players_traits roster_player_id:references:roster_players trait_id:references:traits

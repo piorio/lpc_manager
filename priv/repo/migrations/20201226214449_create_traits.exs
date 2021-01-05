@@ -4,7 +4,7 @@ defmodule LpcManager.Repo.Migrations.CreateTraits do
   def change do
     create table(:traits) do
       add :name, :string
-      add :description, :string
+      add :description, :text
 
       timestamps()
     end

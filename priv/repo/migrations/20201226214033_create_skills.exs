@@ -5,7 +5,7 @@ defmodule LpcManager.Repo.Migrations.CreateSkills do
     create table(:skills) do
       add :name, :string
       add :category, :string
-      add :description, :string
+      add :description, :text
 
       timestamps()
     end

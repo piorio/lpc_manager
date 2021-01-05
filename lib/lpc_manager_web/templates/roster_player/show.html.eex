@@ -1,0 +1,63 @@
+<h1>Show Roster player</h1>
+
+<ul>
+
+  <li>
+    <strong>Min quantity:</strong>
+    <%= @roster_player.min_quantity %>
+  </li>
+
+  <li>
+    <strong>Max quantity:</strong>
+    <%= @roster_player.max_quantity %>
+  </li>
+
+  <li>
+    <strong>Position:</strong>
+    <%= @roster_player.position %>
+  </li>
+
+  <li>
+    <strong>Cost:</strong>
+    <%= @roster_player.cost %>
+  </li>
+
+  <li>
+    <strong>Movement allowance:</strong>
+    <%= @roster_player.movement_allowance %>
+  </li>
+
+  <li>
+    <strong>Strength:</strong>
+    <%= @roster_player.strength %>
+  </li>
+
+  <li>
+    <strong>Agility:</strong>
+    <%= @roster_player.agility %>
+  </li>
+
+  <li>
+    <strong>Passing:</strong>
+    <%= @roster_player.passing %>
+  </li>
+
+  <li>
+    <strong>Armour valuev:</strong>
+    <%= @roster_player.armour_valuev %>
+  </li>
+
+  <li>
+    <strong>Primary:</strong>
+    <%= @roster_player.primary %>
+  </li>
+
+  <li>
+    <strong>Secondary:</strong>
+    <%= @roster_player.secondary %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.roster_player_path(@conn, :edit, @roster_player) %></span>
+<span><%= link "Back", to: Routes.roster_player_path(@conn, :index) %></span>
