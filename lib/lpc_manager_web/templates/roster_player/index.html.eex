@@ -1,7 +1,8 @@
 <h1>Listing Roster players</h1>
 
-<table>
-  <thead>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
     <tr>
       <th>Min quantity</th>
       <th>Max quantity</th>
@@ -18,29 +19,31 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
-<%= for roster_player <- @roster_players do %>
-    <tr>
-      <td><%= roster_player.min_quantity %></td>
-      <td><%= roster_player.max_quantity %></td>
-      <td><%= roster_player.position %></td>
-      <td><%= roster_player.cost %></td>
-      <td><%= roster_player.movement_allowance %></td>
-      <td><%= roster_player.strength %></td>
-      <td><%= roster_player.agility %></td>
-      <td><%= roster_player.passing %></td>
-      <td><%= roster_player.armour_valuev %></td>
-      <td><%= roster_player.primary %></td>
-      <td><%= roster_player.secondary %></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.roster_player_path(@conn, :show, roster_player) %></span>
-        <span><%= link "Edit", to: Routes.roster_player_path(@conn, :edit, roster_player) %></span>
-        <span><%= link "Delete", to: Routes.roster_player_path(@conn, :delete, roster_player), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
-<% end %>
+    <tbody>
+      <%= for roster_player <- @roster_players do %>
+        <tr>
+          <td><%= roster_player.min_quantity %></td>
+          <td><%= roster_player.max_quantity %></td>
+          <td><%= roster_player.position %></td>
+          <td><%= roster_player.cost %></td>
+          <td><%= roster_player.movement_allowance %></td>
+          <td><%= roster_player.strength %></td>
+          <td><%= roster_player.agility %></td>
+          <td><%= roster_player.passing %></td>
+          <td><%= roster_player.armour_valuev %></td>
+          <td><%= roster_player.primary %></td>
+          <td><%= roster_player.secondary %></td>
+
+          <td>
+            <span><%= link "Show", to: Routes.roster_player_path(@conn, :show, roster_player) %></span>
+            <span><%= link "Edit", to: Routes.roster_player_path(@conn, :edit, roster_player) %></span>
+            <span><%= link "Delete", to: Routes.roster_player_path(@conn, :delete, roster_player), method: :delete, data: [confirm: "Are you sure?"] %></span>
+          </td>
+        </tr>
+    <% end %>
   </tbody>
-</table>
+  </table>
+</div>
 
 <span><%= link "New Roster player", to: Routes.roster_player_path(@conn, :new) %></span>

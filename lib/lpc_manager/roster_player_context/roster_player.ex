@@ -15,6 +15,10 @@ defmodule LpcManager.RosterPlayerContext.RosterPlayer do
     field :secondary, {:array, :string}
     field :strength, :integer
 
+    many_to_many :skills, LpcManager.SkillRules.Skill, join_through: "roster_players_skills"
+
+    many_to_many :traits, LpcManager.TraitRules.Trait, join_through: "roster_players_traits"
+
     timestamps()
   end
 

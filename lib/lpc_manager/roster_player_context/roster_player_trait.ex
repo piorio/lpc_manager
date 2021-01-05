@@ -1,10 +1,11 @@
-defmodule LpcManager.LpcManagerWeb.RosterPlayerTrait do
+defmodule LpcManager.RosterPlayerContext.RosterPlayerTrait do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key false
   schema "roster_players_traits" do
-    field :roster_player_id, :id
-    field :trait_id, :id
+    field :roster_player_id, :id, primary_key: true
+    field :trait_id, :id, primary_key: true
 
     timestamps()
   end

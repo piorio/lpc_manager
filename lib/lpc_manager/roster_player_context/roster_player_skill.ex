@@ -1,10 +1,11 @@
-defmodule LpcManager.LpcManagerWeb.RosterPlayerSkill do
+defmodule LpcManager.RosterPlayerContext.RosterPlayerSkill do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key false
   schema "roster_players_skills" do
-    field :roster_player_id, :id
-    field :skill_id, :id
+    field :roster_player_id, :id, primary_key: true
+    field :skill_id, :id, primary_key: true
 
     timestamps()
   end

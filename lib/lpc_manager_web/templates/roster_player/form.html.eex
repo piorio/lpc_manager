@@ -5,51 +5,97 @@
     </div>
   <% end %>
 
-  <%= label f, :min_quantity %>
-  <%= number_input f, :min_quantity %>
+  <div class="form-group">
+    <%= label f, :min_quantity, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :min_quantity, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :min_quantity %>
 
-  <%= label f, :max_quantity %>
-  <%= number_input f, :max_quantity %>
+  <div class="form-group">
+    <%= label f, :max_quantity, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :max_quantity, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :max_quantity %>
 
-  <%= label f, :position %>
-  <%= text_input f, :position %>
+  <div class="form-group">
+    <%= label f, :position, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= text_input f, :position, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :position %>
 
-  <%= label f, :cost %>
-  <%= number_input f, :cost %>
+  <div class="form-group">
+    <%= label f, :cost, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :cost, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :cost %>
 
-  <%= label f, :movement_allowance %>
-  <%= number_input f, :movement_allowance %>
+  <div class="form-group">
+    <%= label f, :movement_allowance, class: "col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :movement_allowance, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :movement_allowance %>
 
-  <%= label f, :strength %>
-  <%= number_input f, :strength %>
+  <div class="form-group">
+    <%= label f, :strength, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :strength, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :strength %>
 
-  <%= label f, :agility %>
-  <%= number_input f, :agility %>
+  <div class="form-group">
+    <%= label f, :agility, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :agility, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :agility %>
 
-  <%= label f, :passing %>
-  <%= number_input f, :passing %>
+  <div class="form-group">
+    <%= label f, :passing, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :passing, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :passing %>
 
-  <%= label f, :armour_value %>
-  <%= number_input f, :armour_value %>
+  <div class="form-group">
+    <%= label f, :armour_value, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :armour_value, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :armour_value %>
 
-  <%= label f, :primary %>
-  <%= multiple_select f, :primary, ["Option 1": "option1", "Option 2": "option2"] %>
+  <div class="form-group">
+    <%= label f, :primary, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= multiple_select f, :primary, ["Option 1": "option1", "Option 2": "option2"], class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :primary %>
 
-  <%= label f, :secondary %>
-  <%= multiple_select f, :secondary, ["Option 1": "option1", "Option 2": "option2"] %>
+  <div class="form-group">
+    <%= label f, :secondary, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= multiple_select f, :secondary, ["Option 1": "option1", "Option 2": "option2"], class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :secondary %>
 
+  <BR>
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "btn btn-primary" %>
+    <%= link "Back", to: Routes.roster_player_path(@conn, :index), class: "btn btn-primary" %>
   </div>
 <% end %>
