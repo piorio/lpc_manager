@@ -31,7 +31,7 @@
           <td><%= roster_player.strength %></td>
           <td><%= roster_player.agility %></td>
           <td><%= roster_player.passing %></td>
-          <td><%= roster_player.armour_valuev %></td>
+          <td><%= roster_player.armour_value %></td>
           <td><%= roster_player.primary %></td>
           <td><%= roster_player.secondary %></td>
 

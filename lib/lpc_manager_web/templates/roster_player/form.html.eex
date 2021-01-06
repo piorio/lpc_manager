@@ -81,7 +81,8 @@
     <%= label f, :primary, class: "col-sm-2 col-form-label col-form-label-lg" %>
   </div>
   <div class="form-group">
-    <%= multiple_select f, :primary, ["Option 1": "option1", "Option 2": "option2"], class: "form-control form-control-lg" %>
+    <%= multiple_select f, :primary, ["AGILITY": "AGILITY", "GENERAL": "GENERAL", "MUTATIONS": "MUTATIONS", "PASSING": "PASSING", "STRENGTH": "STRENGTH"],
+      class: "form-control form-control-lg" %>
   </div>
   <%= error_tag f, :primary %>
 
@@ -89,9 +90,26 @@
     <%= label f, :secondary, class: "col-sm-2 col-form-label col-form-label-lg" %>
   </div>
   <div class="form-group">
-    <%= multiple_select f, :secondary, ["Option 1": "option1", "Option 2": "option2"], class: "form-control form-control-lg" %>
+    <%= multiple_select f, :secondary, ["AGILITY": "AGILITY", "GENERAL": "GENERAL", "MUTATIONS": "MUTATIONS", "PASSING": "PASSING", "STRENGTH": "STRENGTH"],
+      class: "form-control form-control-lg" %>
   </div>
   <%= error_tag f, :secondary %>
+
+  <div class="form-group">
+    <%= label f, :skills, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= multiple_select f, :skills, @skills, class: "form-control form-control-lg" %>
+  </div>
+  <%= error_tag f, :skills %>
+
+  <div class="form-group">
+    <%= label f, :traits, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= multiple_select f, :traits, @traits, class: "form-control form-control-lg" %>
+  </div>
+  <%= error_tag f, :traits %>
 
   <BR>
   <div>

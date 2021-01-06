@@ -17,7 +17,7 @@
     <%= label f, :category, class: "col-sm-2 col-form-label col-form-label-lg" %>
   </div>
   <div class="form-group">
-    <%= text_input f, :category, class: "form-control form-control-lg", placeholder: "Insert skill category" %>
+    <%= select f, :category, ["AGILITY", "GENERAL", "MUTATIONS", "PASSING", "STRENGTH"], class: "form-control form-control-lg", placeholder: "Insert skill category" %>
   </div>
   <%= error_tag f, :category %>
 
@@ -25,7 +25,7 @@
     <%= label f, :description, class: "col-sm-2 col-form-label col-form-label-lg" %>
   </div>
   <div class="form-group">
-    <%= text_input f, :description, class: "form-control form-control-lg", placeholder: "Insert skill description" %>
+    <%= textarea f, :description, class: "form-control form-control-lg", placeholder: "Insert skill description" %>
   </div>
   <%= error_tag f, :description %>
 

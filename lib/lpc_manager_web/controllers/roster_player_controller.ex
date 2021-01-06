@@ -3,6 +3,8 @@ defmodule LpcManagerWeb.RosterPlayerController do
 
   alias LpcManager.RosterPlayerContext
   alias LpcManager.RosterPlayerContext.RosterPlayer
+  alias LpcManager.SkillRules
+  alias LpcManager.TraitRules
 
   def index(conn, _params) do
     roster_players = RosterPlayerContext.list_roster_players()
@@ -10,8 +12,16 @@ defmodule LpcManagerWeb.RosterPlayerController do
   end
 
   def new(conn, _params) do
-    changeset = RosterPlayerContext.change_roster_player(%RosterPlayer{})
-    render(conn, "new.html", changeset: changeset)
+    skills_map =
+      SkillRules.list_skills
+      |> Map.new(fn skill -> {skill.name, skill.id} end)
+
+    traits_map =
+      TraitRules.list_traits
+      |> Map.new(fn trait -> {trait.name, trait.id} end)
+
+    changeset = RosterPlayerContext.change_roster_player(%RosterPlayer{skills: [], traits: []})
+    render(conn, "new.html", changeset: changeset, skills: skills_map, traits: traits_map)
   end
 
   def create(conn, %{"roster_player" => roster_player_params}) do
@@ -32,9 +42,17 @@ defmodule LpcManagerWeb.RosterPlayerController do
   end
 
   def edit(conn, %{"id" => id}) do
+    skills_map =
+      SkillRules.list_skills
+      |> Map.new(fn skill -> {skill.name, skill.id} end)
+
+    traits_map =
+      TraitRules.list_traits
+      |> Map.new(fn trait -> {trait.name, trait.id} end)
+
     roster_player = RosterPlayerContext.get_roster_player!(id)
     changeset = RosterPlayerContext.change_roster_player(roster_player)
-    render(conn, "edit.html", roster_player: roster_player, changeset: changeset)
+    render(conn, "edit.html", roster_player: roster_player, changeset: changeset, skills: skills_map, traits: traits_map)
   end
 
   def update(conn, %{"id" => id, "roster_player" => roster_player_params}) do

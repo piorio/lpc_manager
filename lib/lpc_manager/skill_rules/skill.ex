@@ -16,5 +16,6 @@ defmodule LpcManager.SkillRules.Skill do
     |> cast(attrs, [:name, :category, :description])
     |> validate_required([:name, :category])
     |> unique_constraint(:name)
+    |> validate_inclusion(:category, ~w(AGILITY GENERAL MUTATIONS PASSING STRENGTH))
   end
 end
