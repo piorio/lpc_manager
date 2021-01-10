@@ -21,6 +21,11 @@ defmodule LpcManager.TraitRules do
     Repo.all(Trait)
   end
 
+  def list_traits(trait_ids) do
+    traits_query = from(t in LpcManager.TraitRules.Trait, where: t.id in ^trait_ids)
+    LpcManager.Repo.all(traits_query)
+  end
+
   @doc """
   Gets a single trait.
 

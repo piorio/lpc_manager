@@ -43,8 +43,8 @@
   </li>
 
   <li>
-    <strong>Armour valuev:</strong>
-    <%= @roster_player.armour_valuev %>
+    <strong>Armour value:</strong>
+    <%= @roster_player.armour_value %>
   </li>
 
   <li>
@@ -55,6 +55,24 @@
   <li>
     <strong>Secondary:</strong>
     <%= @roster_player.secondary %>
+  </li>
+
+  <li>
+    <strong>Skills:</strong>
+    <%= for skill <- @roster_player.skills do %>
+      <span style='padding: 4px; margin: 2;'>
+        <%= skill.name %>
+      </span>
+    <% end %>
+  </li>
+
+  <li>
+    <strong>Traits:</strong>
+    <%= for trait <- @roster_player.traits do %>
+      <span style='padding: 4px; margin: 2;'>
+        <%= trait.name %>
+      </span>
+    <% end %>
   </li>
 
 </ul>

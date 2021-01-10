@@ -7,6 +7,8 @@ defmodule LpcManager.RosterPlayerContext do
   alias LpcManager.Repo
 
   alias LpcManager.RosterPlayerContext.RosterPlayer
+  alias LpcManager.SkillRules
+  alias LpcManager.TraitRules
 
   @doc """
   Returns the list of roster_players.
@@ -37,6 +39,12 @@ defmodule LpcManager.RosterPlayerContext do
   """
   def get_roster_player!(id), do: Repo.get!(RosterPlayer, id)
 
+  def get_roster_player_with_assoc!(id) do
+    RosterPlayer
+    |> preload([:traits, :skills])
+    |> Repo.get!(id)
+  end
+
   @doc """
   Creates a roster_player.
 
@@ -50,8 +58,13 @@ defmodule LpcManager.RosterPlayerContext do
 
   """
   def create_roster_player(attrs \\ %{}) do
+    skills = SkillRules.list_skills(attrs["skills"])
+    traits = TraitRules.list_traits(attrs["traits"])
+
     %RosterPlayer{}
     |> RosterPlayer.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:skills, skills)
+    |> Ecto.Changeset.put_assoc(:traits, traits)
     |> Repo.insert()
   end
 

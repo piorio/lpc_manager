@@ -22,6 +22,19 @@ defmodule LpcManager.SkillRules do
   end
 
   @doc """
+  Returns the list of skills based on the list of skills id passed
+
+  ## Examples
+
+      iex> list_skills([1])
+      [%Skill{}, ...]
+  """
+  def list_skills(skill_ids) do
+    skills_query = from(s in Skill, where: s.id in ^skill_ids)
+    LpcManager.Repo.all(skills_query)
+  end
+
+  @doc """
   Gets a single skill.
 
   Raises `Ecto.NoResultsError` if the Skill does not exist.
