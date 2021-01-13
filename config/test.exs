@@ -7,7 +7,7 @@ use Mix.Config
 # Run `mix help test` for more information.
 config :lpc_manager, LpcManager.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "db-pwd",
   database: "lpc_manager_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

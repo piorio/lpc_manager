@@ -13,11 +13,11 @@ defmodule LpcManagerWeb.RosterPlayerController do
 
   def new(conn, _params) do
     skills_map =
-      SkillRules.list_skills
+      SkillRules.list_skills()
       |> Map.new(fn skill -> {skill.name, skill.id} end)
 
     traits_map =
-      TraitRules.list_traits
+      TraitRules.list_traits()
       |> Map.new(fn trait -> {trait.name, trait.id} end)
 
     changeset = RosterPlayerContext.change_roster_player(%RosterPlayer{skills: [], traits: []})
@@ -33,12 +33,14 @@ defmodule LpcManagerWeb.RosterPlayerController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         skills_map =
-          SkillRules.list_skills
+          SkillRules.list_skills()
           |> Map.new(fn skill -> {skill.name, skill.id} end)
 
         traits_map =
-          TraitRules.list_traits
+          TraitRules.list_traits()
           |> Map.new(fn trait -> {trait.name, trait.id} end)
+
+        changeset = %Ecto.Changeset{changeset | data: %RosterPlayer{skills: [], traits: []}}
 
         render(conn, "new.html", changeset: changeset, skills: skills_map, traits: traits_map)
     end
@@ -51,18 +53,24 @@ defmodule LpcManagerWeb.RosterPlayerController do
 
   def edit(conn, %{"id" => id}) do
     skills_map =
-      SkillRules.list_skills
+      SkillRules.list_skills()
       |> Map.new(fn skill -> {skill.name, skill.id} end)
 
     traits_map =
-      TraitRules.list_traits
+      TraitRules.list_traits()
       |> Map.new(fn trait -> {trait.name, trait.id} end)
 
     roster_player = RosterPlayerContext.get_roster_player_with_assoc!(id)
     IO.inspect(roster_player)
 
     changeset = RosterPlayerContext.change_roster_player(roster_player)
-    render(conn, "edit.html", roster_player: roster_player, changeset: changeset, skills: skills_map, traits: traits_map)
+
+    render(conn, "edit.html",
+      roster_player: roster_player,
+      changeset: changeset,
+      skills: skills_map,
+      traits: traits_map
+    )
   end
 
   def update(conn, %{"id" => id, "roster_player" => roster_player_params}) do

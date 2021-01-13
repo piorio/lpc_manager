@@ -24,3 +24,9 @@ mix phx.gen.html RosterPlayerContext RosterPlayer roster_players min_quantity:in
 
 mix phx.gen.schema LpcManagerWeb.RosterPlayerSkill roster_players_skills roster_player_id:references:roster_players skill_id:references:skills
 mix phx.gen.schema LpcManagerWeb.RosterPlayerTrait roster_players_traits roster_player_id:references:roster_players trait_id:references:traits
+
+
+rmap = %{min_quantity: 5, max_quantity: 5, position: "Lineman", cost: 10, movement_allowance: 3, strength: 2, agility: 2, passing: 3, armour_value: 2, primary: ["1"], secondary: ["1"]}
+LpcManager.RosterPlayerContext.create_roster_player(rmap)
+
+  Parameters: %{"_csrf_token" => "UikbaAgqBQ08EAsEVTQaJlsQHlAHKnhQ7ypXYBN9NhgTbvOjcsI5FrI6", "roster_player" => %{"agility" => "1", "armour_value" => "1", "cost" => "11", "max_quantity" => "1", "min_quantity" => "1", "movement_allowance" => "1", "passing" => "1", "position" => "Lineman1", "primary" => ["AGILITY", "GENERAL", "MUTATIONS"], "secondary" => ["PASSING", "STRENGTH"], "skills" => ["1"], "strength" => "1", "traits" => ["1"]}}

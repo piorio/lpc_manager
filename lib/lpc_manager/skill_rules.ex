@@ -22,7 +22,8 @@ defmodule LpcManager.SkillRules do
   end
 
   @doc """
-  Returns the list of skills based on the list of skills id passed
+  Returns the list of skills based on the list of skills id passed.
+  If passed id is nil, an empty list will return
 
   ## Examples
 
@@ -30,8 +31,14 @@ defmodule LpcManager.SkillRules do
       [%Skill{}, ...]
   """
   def list_skills(skill_ids) do
-    skills_query = from(s in Skill, where: s.id in ^skill_ids)
-    LpcManager.Repo.all(skills_query)
+    IO.puts("List skill with")
+    IO.inspect(skill_ids)
+    if skill_ids do
+      skills_query = from(s in Skill, where: s.id in ^skill_ids)
+      LpcManager.Repo.all(skills_query)
+    else
+      []
+    end
   end
 
   @doc """

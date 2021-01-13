@@ -75,6 +75,7 @@ defmodule LpcManagerWeb.RaceControllerTest do
     test "deletes chosen race", %{conn: conn, race: race} do
       conn = delete(conn, Routes.race_path(conn, :delete, race))
       assert redirected_to(conn) == Routes.race_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.race_path(conn, :show, race))
       end

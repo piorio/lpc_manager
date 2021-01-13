@@ -24,5 +24,4 @@ defmodule LpcManager.Users.User do
     |> Ecto.Changeset.cast(attrs, [:role])
     |> Ecto.Changeset.validate_inclusion(:role, ~w(user admin))
   end
-
 end

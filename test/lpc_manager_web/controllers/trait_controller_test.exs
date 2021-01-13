@@ -75,6 +75,7 @@ defmodule LpcManagerWeb.TraitControllerTest do
     test "deletes chosen trait", %{conn: conn, trait: trait} do
       conn = delete(conn, Routes.trait_path(conn, :delete, trait))
       assert redirected_to(conn) == Routes.trait_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.trait_path(conn, :show, trait))
       end

@@ -7,7 +7,11 @@ defmodule LpcManager.SkillRulesTest do
     alias LpcManager.SkillRules.Skill
 
     @valid_attrs %{category: "some category", description: "some description", name: "some name"}
-    @update_attrs %{category: "some updated category", description: "some updated description", name: "some updated name"}
+    @update_attrs %{
+      category: "some updated category",
+      description: "some updated description",
+      name: "some updated name"
+    }
     @invalid_attrs %{category: nil, description: nil, name: nil}
 
     def skill_fixture(attrs \\ %{}) do

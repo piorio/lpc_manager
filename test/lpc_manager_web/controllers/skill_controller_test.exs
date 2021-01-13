@@ -4,7 +4,11 @@ defmodule LpcManagerWeb.SkillControllerTest do
   alias LpcManager.SkillRules
 
   @create_attrs %{category: "some category", description: "some description", name: "some name"}
-  @update_attrs %{category: "some updated category", description: "some updated description", name: "some updated name"}
+  @update_attrs %{
+    category: "some updated category",
+    description: "some updated description",
+    name: "some updated name"
+  }
   @invalid_attrs %{category: nil, description: nil, name: nil}
 
   def fixture(:skill) do
@@ -75,6 +79,7 @@ defmodule LpcManagerWeb.SkillControllerTest do
     test "deletes chosen skill", %{conn: conn, skill: skill} do
       conn = delete(conn, Routes.skill_path(conn, :delete, skill))
       assert redirected_to(conn) == Routes.skill_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.skill_path(conn, :show, skill))
       end

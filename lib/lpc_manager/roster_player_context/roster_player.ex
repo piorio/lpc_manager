@@ -25,7 +25,31 @@ defmodule LpcManager.RosterPlayerContext.RosterPlayer do
   @doc false
   def changeset(roster_player, attrs) do
     roster_player
-    |> cast(attrs, [:min_quantity, :max_quantity, :position, :cost, :movement_allowance, :strength, :agility, :passing, :armour_value, :primary, :secondary])
-    |> validate_required([:min_quantity, :max_quantity, :position, :cost, :movement_allowance, :strength, :agility, :passing, :armour_value, :primary, :secondary])
+    |> cast(attrs, [
+      :min_quantity,
+      :max_quantity,
+      :position,
+      :cost,
+      :movement_allowance,
+      :strength,
+      :agility,
+      :passing,
+      :armour_value,
+      :primary,
+      :secondary
+    ])
+    |> validate_required([
+      :min_quantity,
+      :max_quantity,
+      :position,
+      :cost,
+      :movement_allowance,
+      :strength,
+      :agility,
+      :passing,
+      :armour_value,
+      :primary,
+      :secondary
+    ])
   end
 end

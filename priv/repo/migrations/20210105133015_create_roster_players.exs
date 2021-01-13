@@ -17,6 +17,5 @@ defmodule LpcManager.Repo.Migrations.CreateRosterPlayers do
 
       timestamps()
     end
-
   end
 end
