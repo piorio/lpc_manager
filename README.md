@@ -30,3 +30,8 @@ rmap = %{min_quantity: 5, max_quantity: 5, position: "Lineman", cost: 10, moveme
 LpcManager.RosterPlayerContext.create_roster_player(rmap)
 
   Parameters: %{"_csrf_token" => "UikbaAgqBQ08EAsEVTQaJlsQHlAHKnhQ7ypXYBN9NhgTbvOjcsI5FrI6", "roster_player" => %{"agility" => "1", "armour_value" => "1", "cost" => "11", "max_quantity" => "1", "min_quantity" => "1", "movement_allowance" => "1", "passing" => "1", "position" => "Lineman1", "primary" => ["AGILITY", "GENERAL", "MUTATIONS"], "secondary" => ["PASSING", "STRENGTH"], "skills" => ["1"], "strength" => "1", "traits" => ["1"]}}
+
+attrs = %{"agility" => "1", "armour_value" => "1", "cost" => "11", "max_quantity" => "1", "min_quantity" => "1", "movement_allowance" => "1", "passing" => "1", "position" => "Lineman1", "primary" => ["AGILITY", "GENERAL", "MUTATIONS"], "secondary" => ["PASSING", "STRENGTH"], "skills" => ["1"], "strength" => "1", "traits" => ["1"]}
+LpcManager.RosterPlayerContext.create_roster_player(attrs)
+LpcManager.SkillRules.create_skill(%{"name" => "name", "category" => "AGILITY"})
+Repo.get(RosterPlayer, 1)|> Repo.preload(:skills)|>Repo.preload(:traits)

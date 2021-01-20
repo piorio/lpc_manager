@@ -2,18 +2,24 @@ defmodule LpcManager.RosterPlayerContext.RosterPlayerSkill do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @already_exists "ALREADY_EXISTS"
+
   @primary_key false
   schema "roster_players_skills" do
-    field :roster_player_id, :id, primary_key: true
-    field :skill_id, :id, primary_key: true
-
-    timestamps()
+    belongs_to :roster_player, LpcManager.RosterPlayerContext.RosterPlayer, primary_key: true
+    belongs_to :skill, LpcManager.SkillRules.Skill, primary_key: true
   end
 
   @doc false
-  def changeset(roster_player_skill, attrs) do
-    roster_player_skill
-    |> cast(attrs, [])
-    |> validate_required([])
+  def changeset(struct, attrs \\ %{}) do
+    struct
+    |> cast(attrs, [:roster_player_id, :skill_id])
+    |> validate_required([:roster_player_id, :skill_id])
+    |> foreign_key_constraint(:roster_player_id)
+    |> foreign_key_constraint(:skill_id)
+    |> unique_constraint([:roster_player, :skill],
+      name: :roster_player_id_skill_id_unique_index,
+      message: @already_exists
+    )
   end
 end

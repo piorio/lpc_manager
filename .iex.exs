@@ -5,3 +5,4 @@ alias LpcManager.Repo
 alias LpcManager.RosterPlayerContext.RosterPlayer
 alias LpcManager.SkillRules.Skill
 alias LpcManager.TraitRules.Trait
+alias LpcManager.LpcManager.SkillRules
