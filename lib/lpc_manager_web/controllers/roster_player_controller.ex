@@ -61,8 +61,10 @@ defmodule LpcManagerWeb.RosterPlayerController do
       |> Map.new(fn trait -> {trait.name, trait.id} end)
 
     roster_player = RosterPlayerContext.get_roster_player_with_assoc!(id)
-
     changeset = RosterPlayerContext.change_roster_player(roster_player)
+
+    IO.puts("EDIT CHANGESET")
+    IO.inspect(changeset.data)
 
     render(conn, "edit.html",
       roster_player: roster_player,

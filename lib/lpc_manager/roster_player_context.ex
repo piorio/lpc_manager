@@ -40,9 +40,9 @@ defmodule LpcManager.RosterPlayerContext do
   def get_roster_player!(id), do: Repo.get!(RosterPlayer, id)
 
   def get_roster_player_with_assoc!(id) do
-    RosterPlayer
-    |> preload([:traits, :skills])
-    |> Repo.get!(id)
+    Repo.get!(RosterPlayer, id)
+    |> Repo.preload(:traits)
+    |> Repo.preload(:skills)
   end
 
   @doc """
@@ -58,13 +58,8 @@ defmodule LpcManager.RosterPlayerContext do
 
   """
   def create_roster_player(attrs \\ %{}) do
-    skills = SkillRules.list_skills(attrs["skills"])
-    traits = TraitRules.list_traits(attrs["traits"])
-    IO.inspect(attrs)
-    IO.puts("Create roster player with skills and traits")
-    IO.inspect(skills)
-    IO.inspect(traits)
-    IO.puts("END Create roster player with skills and traits")
+    skills = SkillRules.list_skills(attrs["skills_ids"])
+    traits = TraitRules.list_traits(attrs["traits_ids"])
 
     player = %RosterPlayer{}
     |> RosterPlayer.changeset(attrs)
@@ -72,8 +67,6 @@ defmodule LpcManager.RosterPlayerContext do
     |> Ecto.Changeset.put_assoc(:traits, traits)
     |> Repo.insert()
 
-    IO.puts("Created player: ")
-    IO.inspect(player)
     player
   end
 
@@ -90,8 +83,16 @@ defmodule LpcManager.RosterPlayerContext do
 
   """
   def update_roster_player(%RosterPlayer{} = roster_player, attrs) do
+
+    skills = SkillRules.list_skills(attrs["skills_ids"])
+    traits = TraitRules.list_traits(attrs["traits_ids"])
+
     roster_player
+    |> Repo.preload(:traits)
+    |> Repo.preload(:skills)
     |> RosterPlayer.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:skills, skills) # Required?
+    |> Ecto.Changeset.put_assoc(:traits, traits) # Required?
     |> Repo.update()
   end
 

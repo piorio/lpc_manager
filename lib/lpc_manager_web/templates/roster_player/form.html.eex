@@ -100,7 +100,7 @@
   </div>
   <div class="form-group">
     <%#= multiple_select f, :skills, @skills, class: "form-control form-control-lg" %>
-    <%= skills_input f, @skills%>
+    <%= skills_input f, @skills, @changeset.data.skills%>
   </div>
   <%= error_tag f, :skills %>
 
@@ -109,7 +109,7 @@
   </div>
   <div class="form-group">
     <%#= multiple_select f, :traits, @traits, class: "form-control form-control-lg" %>
-    <%= traits_input f, @traits %>
+    <%= traits_input f, @traits, @changeset.data.traits %>
   </div>
   <%= error_tag f, :traits %>
 

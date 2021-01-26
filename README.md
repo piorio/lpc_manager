@@ -34,4 +34,5 @@ LpcManager.RosterPlayerContext.create_roster_player(rmap)
 attrs = %{"agility" => "1", "armour_value" => "1", "cost" => "11", "max_quantity" => "1", "min_quantity" => "1", "movement_allowance" => "1", "passing" => "1", "position" => "Lineman1", "primary" => ["AGILITY", "GENERAL", "MUTATIONS"], "secondary" => ["PASSING", "STRENGTH"], "skills" => ["1"], "strength" => "1", "traits" => ["1"]}
 LpcManager.RosterPlayerContext.create_roster_player(attrs)
   LpcManager.SkillRules.create_skill(%{"name" => "name", "category" => "AGILITY"})
+  LpcManager.TraitRules.create_trait(%{"name" => "name"})
 user = Repo.get(RosterPlayer, 1)|> Repo.preload(:skills)|>Repo.preload(:traits)
