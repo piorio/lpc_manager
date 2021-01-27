@@ -20,6 +20,9 @@ defmodule LpcManagerWeb.RosterPlayerController do
       TraitRules.list_traits()
       |> Map.new(fn trait -> {trait.name, trait.id} end)
 
+    skills_map = Map.put(skills_map, " ", -1)
+    traits_map = Map.put(traits_map, " ", -1)
+
     changeset = RosterPlayerContext.change_roster_player(%RosterPlayer{skills: [], traits: []})
     render(conn, "new.html", changeset: changeset, skills: skills_map, traits: traits_map)
   end
@@ -40,6 +43,9 @@ defmodule LpcManagerWeb.RosterPlayerController do
           TraitRules.list_traits()
           |> Map.new(fn trait -> {trait.name, trait.id} end)
 
+        skills_map = Map.put(skills_map, " ", -1)
+        traits_map = Map.put(traits_map, " ", -1)
+
         changeset = %Ecto.Changeset{changeset | data: %RosterPlayer{skills: [], traits: []}}
 
         render(conn, "new.html", changeset: changeset, skills: skills_map, traits: traits_map)
@@ -59,6 +65,9 @@ defmodule LpcManagerWeb.RosterPlayerController do
     traits_map =
       TraitRules.list_traits()
       |> Map.new(fn trait -> {trait.name, trait.id} end)
+
+    skills_map = Map.put(skills_map, " ", -1)
+    traits_map = Map.put(traits_map, " ", -1)
 
     roster_player = RosterPlayerContext.get_roster_player_with_assoc!(id)
     changeset = RosterPlayerContext.change_roster_player(roster_player)

@@ -17,7 +17,7 @@ defmodule LpcManager.RosterPlayerContext.RosterPlayer do
 
     many_to_many :skills, LpcManager.SkillRules.Skill, join_through: LpcManager.RosterPlayerContext.RosterPlayerSkill, on_replace: :delete
 
-    many_to_many :traits, LpcManager.TraitRules.Trait, join_through: "roster_players_traits"
+    many_to_many :traits, LpcManager.TraitRules.Trait, join_through: LpcManager.RosterPlayerContext.RosterPlayerTrait, on_replace: :delete
 
     timestamps()
   end
