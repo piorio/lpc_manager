@@ -1,0 +1,35 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+
+  <%= label f, :tier %>
+  <%= number_input f, :tier %>
+  <%= error_tag f, :tier %>
+
+  <%= label f, :re_roll_max %>
+  <%= number_input f, :re_roll_max %>
+  <%= error_tag f, :re_roll_max %>
+
+  <%= label f, :re_roll_cost %>
+  <%= number_input f, :re_roll_cost %>
+  <%= error_tag f, :re_roll_cost %>
+
+  <%= label f, :apothecary %>
+  <%= checkbox f, :apothecary %>
+  <%= error_tag f, :apothecary %>
+
+  <%= label f, :special_rules %>
+  <%= textarea f, :special_rules %>
+  <%= error_tag f, :special_rules %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

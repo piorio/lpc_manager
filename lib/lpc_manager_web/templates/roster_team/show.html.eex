@@ -1,0 +1,38 @@
+<h1>Show Roster team</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @roster_team.name %>
+  </li>
+
+  <li>
+    <strong>Tier:</strong>
+    <%= @roster_team.tier %>
+  </li>
+
+  <li>
+    <strong>Re roll max:</strong>
+    <%= @roster_team.re_roll_max %>
+  </li>
+
+  <li>
+    <strong>Re roll cost:</strong>
+    <%= @roster_team.re_roll_cost %>
+  </li>
+
+  <li>
+    <strong>Apothecary:</strong>
+    <%= @roster_team.apothecary %>
+  </li>
+
+  <li>
+    <strong>Special rules:</strong>
+    <%= @roster_team.special_rules %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.roster_team_path(@conn, :edit, @roster_team) %></span>
+<span><%= link "Back", to: Routes.roster_team_path(@conn, :index) %></span>

@@ -1,0 +1,36 @@
+<h1>Listing Roster teams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Tier</th>
+      <th>Re roll max</th>
+      <th>Re roll cost</th>
+      <th>Apothecary</th>
+      <th>Special rules</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for roster_team <- @roster_teams do %>
+    <tr>
+      <td><%= roster_team.name %></td>
+      <td><%= roster_team.tier %></td>
+      <td><%= roster_team.re_roll_max %></td>
+      <td><%= roster_team.re_roll_cost %></td>
+      <td><%= roster_team.apothecary %></td>
+      <td><%= roster_team.special_rules %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.roster_team_path(@conn, :show, roster_team) %></span>
+        <span><%= link "Edit", to: Routes.roster_team_path(@conn, :edit, roster_team) %></span>
+        <span><%= link "Delete", to: Routes.roster_team_path(@conn, :delete, roster_team), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Roster team", to: Routes.roster_team_path(@conn, :new) %></span>

@@ -47,7 +47,10 @@
                   Trait
                 <% end %>
                 <%= link to: Routes.roster_player_path(@conn, :index), class: "dropdown-item" do%>
-                  Roster Player
+                  Roster Players
+                <% end %>
+                <%= link to: Routes.roster_team_path(@conn, :index), class: "dropdown-item" do%>
+                  Roster Teams
                 <% end %>
               </div>
             </li>
