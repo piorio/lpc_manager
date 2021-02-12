@@ -5,8 +5,6 @@ defmodule LpcManagerWeb.RosterPlayerView do
     selected_skills = changeset_skills
     |> Enum.map(fn s -> s.id end)
 
-    IO.inspect(selected_skills)
-
     multiple_select(form, :skills_ids, skills, selected: selected_skills, class: "form-control form-control-lg")
   end
 

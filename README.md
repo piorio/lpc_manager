@@ -36,3 +36,13 @@ LpcManager.RosterPlayerContext.create_roster_player(attrs)
   LpcManager.SkillRules.create_skill(%{"name" => "name", "category" => "AGILITY"})
   LpcManager.TraitRules.create_trait(%{"name" => "name"})
 user = Repo.get(RosterPlayer, 1)|> Repo.preload(:skills)|>Repo.preload(:traits)
+
+TEAM
+
+team_attrs = %{"apothecary" => "false", "name" => "name", "re_roll_cost" => "2", "re_roll_max" => "7", "special_rules" => "asd", "tier" => "2", "race_id" => "1"}
+roster_team = %LpcManager.RosterTeamContext.RosterTeam{} |> LpcManager.RosterTeamContext.RosterTeam.changeset(team_attrs) |> Repo.insert
+team = Repo.get(LpcManager.RosterTeamContext.RosterTeam, 1)
+
+assoc 
+user = Repo.get(RosterPlayer, 1) |> Repo.preload(:roster_teams)
+changeset = user |> Changeset.change() |> Changeset.put_assoc(:roster_teams, team)

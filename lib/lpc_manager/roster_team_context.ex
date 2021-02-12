@@ -37,6 +37,11 @@ defmodule LpcManager.RosterTeamContext do
   """
   def get_roster_team!(id), do: Repo.get!(RosterTeam, id)
 
+  def get_roster_team_with_assoc!(id) do
+    Repo.get!(RosterTeam, id)
+    |> Repo.preload(:race)
+  end
+
   @doc """
   Creates a roster_team.
 
@@ -50,9 +55,16 @@ defmodule LpcManager.RosterTeamContext do
 
   """
   def create_roster_team(attrs \\ %{}) do
-    %RosterTeam{}
+    # roster_player = LpcManager.RosterPlayerContext.get_roster_player!(attrs["roster_players"])
+    # roster_player = LpcManager.RosterPlayerContext.get_roster_player!(1)
+    race = LpcManager.Rules.get_race!(attrs["race_id"])
+
+    roster_team = %RosterTeam{}
     |> RosterTeam.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:race, race)
     |> Repo.insert()
+
+    roster_team
   end
 
   @doc """
@@ -68,8 +80,12 @@ defmodule LpcManager.RosterTeamContext do
 
   """
   def update_roster_team(%RosterTeam{} = roster_team, attrs) do
+    race = LpcManager.Rules.get_race!(attrs["race_id"])
+
     roster_team
+    |> Repo.preload(:race)
     |> RosterTeam.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:race, race)
     |> Repo.update()
   end
 

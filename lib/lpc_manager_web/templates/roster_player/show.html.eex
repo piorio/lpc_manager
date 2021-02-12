@@ -58,6 +58,11 @@
   </li>
 
   <li>
+    <strong>Team:</strong>
+    <%= @roster_player.roster_teams.name %>
+  </li>
+
+  <li>
     <strong>Skills:</strong>
     <%= for skill <- @roster_player.skills do %>
       <span style='padding: 4px; margin: 2;'>

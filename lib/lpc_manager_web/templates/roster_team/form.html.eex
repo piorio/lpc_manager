@@ -5,31 +5,66 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
+  <div class="form-group">
+    <%= label f, :name, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= text_input f, :name, class: "form-control form-control-lg", placeholder: "Insert team name" %>
+  </div>
   <%= error_tag f, :name %>
 
-  <%= label f, :tier %>
-  <%= number_input f, :tier %>
+  <div class="form-group">
+    <%= label f, :race_id, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= select f, :race_id, @races, class: "form-control form-control-lg" %>
+  </div>
+  <%= error_tag f, :race_id %>
+
+  <div class="form-group">
+    <%= label f, :tier, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :tier, class: "form-control form-control-lg", placeholder: "Set the team tier" %>
+  </div>
   <%= error_tag f, :tier %>
 
-  <%= label f, :re_roll_max %>
-  <%= number_input f, :re_roll_max %>
+  <div class="form-group">
+    <%= label f, :re_roll_max, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :re_roll_max, class: "form-control form-control-lg", placeholder: "Set the max re-roll" %>
+  </div>
   <%= error_tag f, :re_roll_max %>
 
-  <%= label f, :re_roll_cost %>
-  <%= number_input f, :re_roll_cost %>
+  <div class="form-group">
+    <%= label f, :re_roll_cost, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= number_input f, :re_roll_cost, class: "form-control form-control-lg", placeholder: "Re-roll cost" %>
+  </div>
   <%= error_tag f, :re_roll_cost %>
 
-  <%= label f, :apothecary %>
-  <%= checkbox f, :apothecary %>
+  <div class="form-group">
+    <%= label f, :apothecary, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= checkbox f, :apothecary %>
+  </div>
   <%= error_tag f, :apothecary %>
 
-  <%= label f, :special_rules %>
-  <%= textarea f, :special_rules %>
+  <div class="form-group">
+    <%= label f, :special_rules, class: "col-sm-2 col-form-label col-form-label-lg" %>
+  </div>
+  <div class="form-group">
+    <%= textarea f, :special_rules, class: "form-control form-control-lg" %>
+  </div>
   <%= error_tag f, :special_rules %>
 
+  <br>
+
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "btn btn-primary" %>
+    <%= link "Back", to: Routes.roster_team_path(@conn, :index), class: "btn btn-primary" %>
   </div>
 <% end %>

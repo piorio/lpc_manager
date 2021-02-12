@@ -19,6 +19,8 @@ defmodule LpcManager.RosterPlayerContext.RosterPlayer do
 
     many_to_many :traits, LpcManager.TraitRules.Trait, join_through: LpcManager.RosterPlayerContext.RosterPlayerTrait, on_replace: :delete
 
+    belongs_to :roster_teams, LpcManager.RosterTeamContext.RosterTeam
+
     timestamps()
   end
 

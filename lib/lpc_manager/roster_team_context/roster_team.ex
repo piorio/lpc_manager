@@ -9,7 +9,8 @@ defmodule LpcManager.RosterTeamContext.RosterTeam do
     field :re_roll_max, :integer
     field :special_rules, :string
     field :tier, :integer
-    field :race_id, :id
+
+    belongs_to :race, LpcManager.Rules.Race, on_replace: :delete
 
     timestamps()
   end

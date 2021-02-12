@@ -8,6 +8,11 @@
   </li>
 
   <li>
+    <strong>Race:</strong>
+    <%= @roster_team.race.name %>
+  </li>
+
+  <li>
     <strong>Tier:</strong>
     <%= @roster_team.tier %>
   </li>

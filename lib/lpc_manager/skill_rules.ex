@@ -31,8 +31,6 @@ defmodule LpcManager.SkillRules do
       [%Skill{}, ...]
   """
   def list_skills(skill_ids) do
-    IO.puts("List skill with")
-    IO.inspect(skill_ids)
     if skill_ids do
       skills_query = from(s in Skill, where: s.id in ^skill_ids)
       LpcManager.Repo.all(skills_query)

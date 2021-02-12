@@ -23,8 +23,11 @@ defmodule LpcManagerWeb.RosterPlayerController do
     skills_map = Map.put(skills_map, " ", -1)
     traits_map = Map.put(traits_map, " ", -1)
 
+    roster_teams_list = LpcManager.RosterTeamContext.list_roster_teams()
+      |> Map.new(fn team -> {team.name, team.id} end)
+
     changeset = RosterPlayerContext.change_roster_player(%RosterPlayer{skills: [], traits: []})
-    render(conn, "new.html", changeset: changeset, skills: skills_map, traits: traits_map)
+    render(conn, "new.html", changeset: changeset, skills: skills_map, traits: traits_map, roster_teams_list: roster_teams_list)
   end
 
   def create(conn, %{"roster_player" => roster_player_params}) do
@@ -46,9 +49,14 @@ defmodule LpcManagerWeb.RosterPlayerController do
         skills_map = Map.put(skills_map, " ", -1)
         traits_map = Map.put(traits_map, " ", -1)
 
+        roster_teams_list = LpcManager.RosterTeamContext.list_roster_teams()
+          |> Map.new(fn team -> {team.name, team.id} end)
+
         changeset = %Ecto.Changeset{changeset | data: %RosterPlayer{skills: [], traits: []}}
 
-        render(conn, "new.html", changeset: changeset, skills: skills_map, traits: traits_map)
+        IO.inspect(changeset)
+
+        render(conn, "new.html", changeset: changeset, skills: skills_map, traits: traits_map, roster_teams_list: roster_teams_list)
     end
   end
 
@@ -69,17 +77,18 @@ defmodule LpcManagerWeb.RosterPlayerController do
     skills_map = Map.put(skills_map, " ", -1)
     traits_map = Map.put(traits_map, " ", -1)
 
+    roster_teams_list = LpcManager.RosterTeamContext.list_roster_teams()
+      |> Map.new(fn team -> {team.name, team.id} end)
+
     roster_player = RosterPlayerContext.get_roster_player_with_assoc!(id)
     changeset = RosterPlayerContext.change_roster_player(roster_player)
-
-    IO.puts("EDIT CHANGESET")
-    IO.inspect(changeset.data)
 
     render(conn, "edit.html",
       roster_player: roster_player,
       changeset: changeset,
       skills: skills_map,
-      traits: traits_map
+      traits: traits_map,
+      roster_teams_list: roster_teams_list
     )
   end
 
