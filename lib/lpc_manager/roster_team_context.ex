@@ -80,12 +80,15 @@ defmodule LpcManager.RosterTeamContext do
 
   """
   def update_roster_team(%RosterTeam{} = roster_team, attrs) do
+    # Verify that race exist
     race = LpcManager.Rules.get_race!(attrs["race_id"])
+
+    roster_team = %RosterTeam{roster_team | race_id: attrs["race_id"]}
 
     roster_team
     |> Repo.preload(:race)
     |> RosterTeam.changeset(attrs)
-    |> Ecto.Changeset.put_assoc(:race, race)
+    |> Ecto.Changeset.put_assoc(:race, race) # Required????
     |> Repo.update()
   end
 

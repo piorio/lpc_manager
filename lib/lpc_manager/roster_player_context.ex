@@ -90,7 +90,10 @@ defmodule LpcManager.RosterPlayerContext do
 
     skills = SkillRules.list_skills(attrs["skills_ids"])
     traits = TraitRules.list_traits(attrs["traits_ids"])
+
+    #Required to verify that team exist
     team = RosterTeamContext.get_roster_team!(attrs["roster_team_id"])
+    roster_player = %RosterPlayer{roster_player | roster_teams_id: attrs["roster_team_id"]}
 
     roster_player
     |> Repo.preload(:traits)

@@ -102,7 +102,27 @@ defmodule LpcManagerWeb.RosterPlayerController do
         |> redirect(to: Routes.roster_player_path(conn, :show, roster_player))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", roster_player: roster_player, changeset: changeset)
+        skills_map =
+          SkillRules.list_skills()
+          |> Map.new(fn skill -> {skill.name, skill.id} end)
+
+        traits_map =
+          TraitRules.list_traits()
+          |> Map.new(fn trait -> {trait.name, trait.id} end)
+
+        skills_map = Map.put(skills_map, " ", -1)
+        traits_map = Map.put(traits_map, " ", -1)
+
+        roster_teams_list = LpcManager.RosterTeamContext.list_roster_teams()
+        |> Map.new(fn team -> {team.name, team.id} end)
+
+        render(conn, "edit.html",
+          roster_player: roster_player,
+          changeset: changeset,
+          skills: skills_map,
+          traits: traits_map,
+          roster_teams_list: roster_teams_list
+        )
     end
   end
 
