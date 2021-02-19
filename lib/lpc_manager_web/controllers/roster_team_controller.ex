@@ -25,7 +25,10 @@ defmodule LpcManagerWeb.RosterTeamController do
         |> redirect(to: Routes.roster_team_path(conn, :show, roster_team))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        races = LpcManager.Rules.list_races()
+        |> Map.new(fn race -> {race.name, race.id} end)
+
+        render(conn, "new.html", changeset: changeset, races: races)
     end
   end
 

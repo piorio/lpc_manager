@@ -19,6 +19,10 @@ defmodule LpcManagerWeb.Router do
     plug LpcManager.Plugs.EnsureRolePlug, :admin
   end
 
+  pipeline :user do
+    plug LpcManager.Plugs.EnsureRolePlug, :user
+  end
+
   scope "/" do
     pipe_through :browser
 
@@ -29,6 +33,12 @@ defmodule LpcManagerWeb.Router do
     pipe_through :browser
 
     get "/", MainController, :index
+  end
+
+  scope "/user", LpcManagerWeb do
+    pipe_through [:browser, :user]
+
+    resources "/teams", TeamController
   end
 
   scope "/admin", LpcManagerWeb do
