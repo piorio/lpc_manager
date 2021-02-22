@@ -22,4 +22,8 @@ defmodule LpcManager.Users do
   @spec is_admin?(t()) :: boolean()
   def is_admin?(%{role: "admin"}), do: true
   def is_admin?(_any), do: false
+
+  @spec is_user?(t()) :: boolean()
+  def is_user?(%{role: "user"}), do: true
+  def is_user?(_any), do: false
 end

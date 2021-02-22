@@ -18,7 +18,7 @@ defmodule LpcManagerWeb.TeamController do
   end
 
   def create(conn, %{"team" => team_params}) do
-    case TeamContext.create_team(team_params) do
+    case TeamContext.create_team(conn, team_params) do
       {:ok, team} ->
         conn
         |> put_flash(:info, "Team created successfully.")

@@ -24,15 +24,6 @@
 
       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Notifications <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Switch account</a>
-          </li>
           <%= if LpcManager.Users.is_admin?(@current_user) do %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Super Admin</a>
@@ -101,6 +92,17 @@
                   Home <span class="sr-only">(current)</span>
                 </a>
               </li>
+              <%= if LpcManager.Users.is_user?(@current_user) do %>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file"></span>
+                    My Teams
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <%= link raw(~s'<span data-feather="file"></span> All teams'), to: Routes.team_path(@conn, :index), class: "nav-link" %>
+                </li>
+              <% end %>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="file"></span>

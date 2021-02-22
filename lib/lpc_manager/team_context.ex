@@ -49,9 +49,8 @@ defmodule LpcManager.TeamContext do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_team(attrs \\ %{}) do
-    IO.inspect(attrs)
-    %Team{value: 0}
+  def create_team(conn, attrs \\ %{}) do
+    %Team{value: 0, user: Pow.Plug.current_user(conn)}
     |> Team.changeset(attrs)
     |> Repo.insert()
   end
