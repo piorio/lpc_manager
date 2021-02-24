@@ -46,3 +46,8 @@ team = Repo.get(LpcManager.RosterTeamContext.RosterTeam, 1)
 assoc 
 user = Repo.get(RosterPlayer, 1) |> Repo.preload(:roster_teams)
 changeset = user |> Changeset.change() |> Changeset.put_assoc(:roster_teams, team)
+
+TEAM UI
+<span><%= link "Edit", to: Routes.team_path(@conn, :edit, team) %></span>
+<span><%= link "Delete", to: Routes.team_path(@conn, :delete, team), method: :delete, data: [confirm: "Are you sure?"] %></span>
+<span><%= link "Edit", to: Routes.team_path(@conn, :edit, @team) %></span>

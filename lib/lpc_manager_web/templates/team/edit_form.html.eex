@@ -1,0 +1,30 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+<div class="form-group">
+  <%= label f, :name, class: "col-sm-2 col-form-label col-form-label-lg" %>
+</div>
+<div class="form-group">
+  <%= text_input f, :name, class: "form-control form-control-lg", placeholder: "Insert team name" %>
+</div>
+<%= error_tag f, :name %>
+
+<div class="form-group">
+  <%= label f, :treasury, class: "col-sm-2 col-form-label col-form-label-lg" %>
+</div>
+<div class="form-group">
+  <%= number_input f, :treasury, class: "form-control form-control-lg", placeholder: "Insert initial tresure" %>
+</div>
+<%= error_tag f, :treasury %>
+
+<br>
+
+<div>
+    <%= submit "Save", class: "btn btn-primary" %>
+    <%= link "Back", to: Routes.team_path(@conn, :index), class: "btn btn-primary" %>
+</div>
+<% end %>

@@ -92,17 +92,16 @@
                   Home <span class="sr-only">(current)</span>
                 </a>
               </li>
+              <hr>
               <%= if LpcManager.Users.is_user?(@current_user) do %>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span data-feather="file"></span>
-                    My Teams
-                  </a>
-                </li>
                 <li class="nav-item">
                   <%= link raw(~s'<span data-feather="file"></span> All teams'), to: Routes.team_path(@conn, :index), class: "nav-link" %>
                 </li>
+                <li class="nav-item">
+                  <%= link raw(~s'<span data-feather="file"></span> My teams'), to: Routes.team_path(@conn, :index_my_teams), class: "nav-link" %>
+                </li>
               <% end %>
+              <hr>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="file"></span>

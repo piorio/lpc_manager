@@ -21,6 +21,17 @@ defmodule LpcManager.TeamContext do
     Repo.all(Team)
   end
 
+  def list_teams_with_assoc do
+    Repo.all(Team)
+      |> Repo.preload(:user)
+      |> Repo.preload(:roster_team)
+  end
+
+  def list_users_teams_with_assoc(user) do
+    query = from(t in Team, where: t.user_id == ^user.id, preload: [:user, :roster_team])
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single team.
 
@@ -37,6 +48,12 @@ defmodule LpcManager.TeamContext do
   """
   def get_team!(id), do: Repo.get!(Team, id)
 
+  def get_team_with_assoc!(id) do
+    Repo.get!(Team, id)
+    |> Repo.preload(:user)
+    |> Repo.preload(:roster_team)
+  end
+
   @doc """
   Creates a team.
 
@@ -50,9 +67,11 @@ defmodule LpcManager.TeamContext do
 
   """
   def create_team(conn, attrs \\ %{}) do
-    %Team{value: 0, user: Pow.Plug.current_user(conn)}
-    |> Team.changeset(attrs)
-    |> Repo.insert()
+    roster_team = LpcManager.RosterTeamContext.get_roster_team!(attrs["roster_team_id"])
+
+    %Team{value: 0, user: Pow.Plug.current_user(conn), roster_team: roster_team}
+      |> Team.changeset(attrs)
+      |> Repo.insert()
   end
 
   @doc """

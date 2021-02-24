@@ -39,6 +39,7 @@ defmodule LpcManagerWeb.Router do
     pipe_through [:browser, :user]
 
     resources "/teams", TeamController
+    get "/myTeams", TeamController, :index_my_teams
   end
 
   scope "/admin", LpcManagerWeb do

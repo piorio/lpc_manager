@@ -7,12 +7,12 @@ defmodule LpcManager.Repo.Migrations.CreateTeams do
       add :value, :integer
       add :treasury, :integer
       add :user_id, references(:users, on_delete: :nothing)
-      add :roster_team, references(:roster_teams, on_delete: :nothing)
+      add :roster_team_id, references(:roster_teams, on_delete: :nothing)
 
       timestamps()
     end
 
     create index(:teams, [:user_id])
-    create index(:teams, [:roster_team])
+    create index(:teams, [:roster_team_id])
   end
 end

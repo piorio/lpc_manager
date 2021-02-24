@@ -5,8 +5,15 @@ defmodule LpcManagerWeb.TeamController do
   alias LpcManager.TeamContext.Team
 
   def index(conn, _params) do
-    teams = TeamContext.list_teams()
+    teams = TeamContext.list_teams_with_assoc()
     render(conn, "index.html", teams: teams)
+  end
+
+  def index_my_teams(conn, _params) do
+    teams = Pow.Plug.current_user(conn)
+      |> TeamContext.list_users_teams_with_assoc
+
+    render(conn, "index_my_teams.html", teams: teams)
   end
 
   def new(conn, _params) do
@@ -30,13 +37,15 @@ defmodule LpcManagerWeb.TeamController do
   end
 
   def show(conn, %{"id" => id}) do
-    team = TeamContext.get_team!(id)
+    team = TeamContext.get_team_with_assoc!(id)
     render(conn, "show.html", team: team)
   end
 
   def edit(conn, %{"id" => id}) do
     team = TeamContext.get_team!(id)
     changeset = TeamContext.change_team(team)
+
+    # Can't pass roster_teams because edit team will never change the roster team
     render(conn, "edit.html", team: team, changeset: changeset)
   end
 
