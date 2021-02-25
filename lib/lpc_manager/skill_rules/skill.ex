@@ -7,7 +7,9 @@ defmodule LpcManager.SkillRules.Skill do
     field :description, :string
     field :name, :string
 
-    many_to_many :roster_players, LpcManager.RosterPlayerContext.RosterPlayer, join_through: LpcManager.RosterPlayerContext.RosterPlayerSkill, on_replace: :delete
+    many_to_many :roster_players, LpcManager.RosterPlayerContext.RosterPlayer,
+      join_through: LpcManager.RosterPlayerContext.RosterPlayerSkill,
+      on_replace: :delete
 
     timestamps()
   end

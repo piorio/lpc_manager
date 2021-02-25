@@ -6,9 +6,30 @@ defmodule LpcManager.RosterTeamContextTest do
   describe "roster_teams" do
     alias LpcManager.RosterTeamContext.RosterTeam
 
-    @valid_attrs %{apothecary: true, name: "some name", re_roll_cost: 42, re_roll_max: 42, special_rules: "some special_rules", tier: 42}
-    @update_attrs %{apothecary: false, name: "some updated name", re_roll_cost: 43, re_roll_max: 43, special_rules: "some updated special_rules", tier: 43}
-    @invalid_attrs %{apothecary: nil, name: nil, re_roll_cost: nil, re_roll_max: nil, special_rules: nil, tier: nil}
+    @valid_attrs %{
+      apothecary: true,
+      name: "some name",
+      re_roll_cost: 42,
+      re_roll_max: 42,
+      special_rules: "some special_rules",
+      tier: 42
+    }
+    @update_attrs %{
+      apothecary: false,
+      name: "some updated name",
+      re_roll_cost: 43,
+      re_roll_max: 43,
+      special_rules: "some updated special_rules",
+      tier: 43
+    }
+    @invalid_attrs %{
+      apothecary: nil,
+      name: nil,
+      re_roll_cost: nil,
+      re_roll_max: nil,
+      special_rules: nil,
+      tier: nil
+    }
 
     def roster_team_fixture(attrs \\ %{}) do
       {:ok, roster_team} =
@@ -30,7 +51,9 @@ defmodule LpcManager.RosterTeamContextTest do
     end
 
     test "create_roster_team/1 with valid data creates a roster_team" do
-      assert {:ok, %RosterTeam{} = roster_team} = RosterTeamContext.create_roster_team(@valid_attrs)
+      assert {:ok, %RosterTeam{} = roster_team} =
+               RosterTeamContext.create_roster_team(@valid_attrs)
+
       assert roster_team.apothecary == true
       assert roster_team.name == "some name"
       assert roster_team.re_roll_cost == 42
@@ -45,7 +68,10 @@ defmodule LpcManager.RosterTeamContextTest do
 
     test "update_roster_team/2 with valid data updates the roster_team" do
       roster_team = roster_team_fixture()
-      assert {:ok, %RosterTeam{} = roster_team} = RosterTeamContext.update_roster_team(roster_team, @update_attrs)
+
+      assert {:ok, %RosterTeam{} = roster_team} =
+               RosterTeamContext.update_roster_team(roster_team, @update_attrs)
+
       assert roster_team.apothecary == false
       assert roster_team.name == "some updated name"
       assert roster_team.re_roll_cost == 43
@@ -56,14 +82,20 @@ defmodule LpcManager.RosterTeamContextTest do
 
     test "update_roster_team/2 with invalid data returns error changeset" do
       roster_team = roster_team_fixture()
-      assert {:error, %Ecto.Changeset{}} = RosterTeamContext.update_roster_team(roster_team, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               RosterTeamContext.update_roster_team(roster_team, @invalid_attrs)
+
       assert roster_team == RosterTeamContext.get_roster_team!(roster_team.id)
     end
 
     test "delete_roster_team/1 deletes the roster_team" do
       roster_team = roster_team_fixture()
       assert {:ok, %RosterTeam{}} = RosterTeamContext.delete_roster_team(roster_team)
-      assert_raise Ecto.NoResultsError, fn -> RosterTeamContext.get_roster_team!(roster_team.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        RosterTeamContext.get_roster_team!(roster_team.id)
+      end
     end
 
     test "change_roster_team/1 returns a roster_team changeset" do

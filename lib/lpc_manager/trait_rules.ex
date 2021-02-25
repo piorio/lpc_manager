@@ -24,6 +24,7 @@ defmodule LpcManager.TraitRules do
   def list_traits(trait_ids) do
     IO.puts("List traits with")
     IO.inspect(trait_ids)
+
     if trait_ids do
       traits_query = from(t in LpcManager.TraitRules.Trait, where: t.id in ^trait_ids)
       LpcManager.Repo.all(traits_query)

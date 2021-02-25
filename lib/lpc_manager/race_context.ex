@@ -1,4 +1,4 @@
-defmodule LpcManager.Rules do
+defmodule LpcManager.RaceContext do
   @moduledoc """
   The Rules context.
   """
@@ -6,7 +6,7 @@ defmodule LpcManager.Rules do
   import Ecto.Query, warn: false
   alias LpcManager.Repo
 
-  alias LpcManager.Rules.Race
+  alias LpcManager.RaceContext.Race
 
   @doc """
   Returns the list of races.

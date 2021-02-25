@@ -10,15 +10,17 @@ defmodule LpcManagerWeb.TeamController do
   end
 
   def index_my_teams(conn, _params) do
-    teams = Pow.Plug.current_user(conn)
-      |> TeamContext.list_users_teams_with_assoc
+    teams =
+      Pow.Plug.current_user(conn)
+      |> TeamContext.list_users_teams_with_assoc()
 
     render(conn, "index_my_teams.html", teams: teams)
   end
 
   def new(conn, _params) do
-    roster_teams = LpcManager.RosterTeamContext.list_roster_teams()
-    |> Map.new(fn team -> {team.name, team.id} end)
+    roster_teams =
+      TeamContext.list_roster_teams()
+      |> Map.new(fn team -> {team.name, team.id} end)
 
     changeset = TeamContext.change_team(%Team{})
     render(conn, "new.html", changeset: changeset, roster_teams: roster_teams)

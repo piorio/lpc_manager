@@ -1,4 +1,4 @@
-defmodule LpcManager.Rules.Race do
+defmodule LpcManager.RaceContext.Race do
   use Ecto.Schema
   import Ecto.Changeset
 

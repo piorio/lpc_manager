@@ -1,6 +1,6 @@
-defmodule LpcManager.RosterPlayerContext do
+defmodule LpcManager.PlayerContext do
   @moduledoc """
-  The RosterPlayerContext context.
+  The PlayerContext context.
   """
 
   import Ecto.Query, warn: false
@@ -9,7 +9,7 @@ defmodule LpcManager.RosterPlayerContext do
   alias LpcManager.RosterPlayerContext.RosterPlayer
   alias LpcManager.SkillRules
   alias LpcManager.TraitRules
-  alias LpcManager.RosterTeamContext
+  alias LpcManager.TeamContext
 
   @doc """
   Returns the list of roster_players.
@@ -62,14 +62,15 @@ defmodule LpcManager.RosterPlayerContext do
   def create_roster_player(attrs \\ %{}) do
     skills = SkillRules.list_skills(attrs["skills_ids"])
     traits = TraitRules.list_traits(attrs["traits_ids"])
-    team = RosterTeamContext.get_roster_team!(attrs["roster_team_id"])
+    team = TeamContext.get_roster_team!(attrs["roster_team_id"])
 
-    player = %RosterPlayer{}
-    |> RosterPlayer.changeset(attrs)
-    |> Ecto.Changeset.put_assoc(:skills, skills)
-    |> Ecto.Changeset.put_assoc(:traits, traits)
-    |> Ecto.Changeset.put_assoc(:roster_teams, team)
-    |> Repo.insert()
+    player =
+      %RosterPlayer{}
+      |> RosterPlayer.changeset(attrs)
+      |> Ecto.Changeset.put_assoc(:skills, skills)
+      |> Ecto.Changeset.put_assoc(:traits, traits)
+      |> Ecto.Changeset.put_assoc(:roster_teams, team)
+      |> Repo.insert()
 
     player
   end
@@ -87,12 +88,11 @@ defmodule LpcManager.RosterPlayerContext do
 
   """
   def update_roster_player(%RosterPlayer{} = roster_player, attrs) do
-
     skills = SkillRules.list_skills(attrs["skills_ids"])
     traits = TraitRules.list_traits(attrs["traits_ids"])
 
-    #Required to verify that team exist
-    team = RosterTeamContext.get_roster_team!(attrs["roster_team_id"])
+    # Required to verify that team exist
+    team = TeamContext.get_roster_team!(attrs["roster_team_id"])
     roster_player = %RosterPlayer{roster_player | roster_teams_id: attrs["roster_team_id"]}
 
     roster_player

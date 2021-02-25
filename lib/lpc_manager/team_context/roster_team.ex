@@ -1,4 +1,4 @@
-defmodule LpcManager.RosterTeamContext.RosterTeam do
+defmodule LpcManager.TeamContext.RosterTeam do
   use Ecto.Schema
   import Ecto.Changeset
 
