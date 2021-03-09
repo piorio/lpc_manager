@@ -168,7 +168,7 @@ defmodule LpcManager.TeamContext do
   """
   def update_roster_team(%RosterTeam{} = roster_team, attrs) do
     # Verify that race exist
-    race = TeamContext.get_race!(attrs["race_id"])
+    race = RaceContext.get_race!(attrs["race_id"])
 
     roster_team = %RosterTeam{roster_team | race_id: attrs["race_id"]}
 

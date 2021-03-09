@@ -1,4 +1,4 @@
-defmodule LpcManager.SkillRules.Skill do
+defmodule LpcManager.PlayerContext.Skill do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -7,8 +7,8 @@ defmodule LpcManager.SkillRules.Skill do
     field :description, :string
     field :name, :string
 
-    many_to_many :roster_players, LpcManager.RosterPlayerContext.RosterPlayer,
-      join_through: LpcManager.RosterPlayerContext.RosterPlayerSkill,
+    many_to_many :roster_players, LpcManager.PlayerContext.RosterPlayer,
+      join_through: LpcManager.PlayerContext.RosterPlayerSkill,
       on_replace: :delete
 
     timestamps()

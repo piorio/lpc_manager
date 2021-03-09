@@ -10,7 +10,7 @@ defmodule LpcManager.TeamContext.RosterTeam do
     field :special_rules, :string
     field :tier, :integer
 
-    belongs_to :race, LpcManager.Rules.Race, on_replace: :update
+    belongs_to :race, LpcManager.RaceContext.Race, on_replace: :update
 
     timestamps()
   end

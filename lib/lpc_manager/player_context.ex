@@ -6,9 +6,9 @@ defmodule LpcManager.PlayerContext do
   import Ecto.Query, warn: false
   alias LpcManager.Repo
 
-  alias LpcManager.RosterPlayerContext.RosterPlayer
-  alias LpcManager.SkillRules
-  alias LpcManager.TraitRules
+  alias LpcManager.PlayerContext.RosterPlayer
+  alias LpcManager.PlayerContext.Skill
+  alias LpcManager.PlayerContext.Trait
   alias LpcManager.TeamContext
 
   @doc """
@@ -60,8 +60,8 @@ defmodule LpcManager.PlayerContext do
 
   """
   def create_roster_player(attrs \\ %{}) do
-    skills = SkillRules.list_skills(attrs["skills_ids"])
-    traits = TraitRules.list_traits(attrs["traits_ids"])
+    skills = list_skills(attrs["skills_ids"])
+    traits = list_traits(attrs["traits_ids"])
     team = TeamContext.get_roster_team!(attrs["roster_team_id"])
 
     player =
@@ -88,8 +88,8 @@ defmodule LpcManager.PlayerContext do
 
   """
   def update_roster_player(%RosterPlayer{} = roster_player, attrs) do
-    skills = SkillRules.list_skills(attrs["skills_ids"])
-    traits = TraitRules.list_traits(attrs["traits_ids"])
+    skills = list_skills(attrs["skills_ids"])
+    traits = list_traits(attrs["traits_ids"])
 
     # Required to verify that team exist
     team = TeamContext.get_roster_team!(attrs["roster_team_id"])
@@ -133,5 +133,223 @@ defmodule LpcManager.PlayerContext do
   """
   def change_roster_player(%RosterPlayer{} = roster_player, attrs \\ %{}) do
     RosterPlayer.changeset(roster_player, attrs)
+  end
+
+  @doc """
+  Returns the list of skills.
+
+  ## Examples
+
+      iex> list_skills()
+      [%Skill{}, ...]
+
+  """
+  def list_skills do
+    Repo.all(Skill)
+  end
+
+  @doc """
+  Returns the list of skills based on the list of skills id passed.
+  If passed id is nil, an empty list will return
+
+  ## Examples
+
+      iex> list_skills([1])
+      [%Skill{}, ...]
+  """
+  def list_skills(skill_ids) do
+    if skill_ids do
+      skills_query = from(s in Skill, where: s.id in ^skill_ids)
+      LpcManager.Repo.all(skills_query)
+    else
+      []
+    end
+  end
+
+  @doc """
+  Gets a single skill.
+
+  Raises `Ecto.NoResultsError` if the Skill does not exist.
+
+  ## Examples
+
+      iex> get_skill!(123)
+      %Skill{}
+
+      iex> get_skill!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_skill!(id), do: Repo.get!(Skill, id)
+
+  @doc """
+  Creates a skill.
+
+  ## Examples
+
+      iex> create_skill(%{field: value})
+      {:ok, %Skill{}}
+
+      iex> create_skill(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_skill(attrs \\ %{}) do
+    %Skill{}
+    |> Skill.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a skill.
+
+  ## Examples
+
+      iex> update_skill(skill, %{field: new_value})
+      {:ok, %Skill{}}
+
+      iex> update_skill(skill, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_skill(%Skill{} = skill, attrs) do
+    skill
+    |> Skill.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a skill.
+
+  ## Examples
+
+      iex> delete_skill(skill)
+      {:ok, %Skill{}}
+
+      iex> delete_skill(skill)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_skill(%Skill{} = skill) do
+    Repo.delete(skill)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking skill changes.
+
+  ## Examples
+
+      iex> change_skill(skill)
+      %Ecto.Changeset{data: %Skill{}}
+
+  """
+  def change_skill(%Skill{} = skill, attrs \\ %{}) do
+    Skill.changeset(skill, attrs)
+  end
+
+  @doc """
+  Returns the list of traits.
+
+  ## Examples
+
+      iex> list_traits()
+      [%Trait{}, ...]
+
+  """
+  def list_traits do
+    Repo.all(Trait)
+  end
+
+  def list_traits(trait_ids) do
+    IO.puts("List traits with")
+    IO.inspect(trait_ids)
+
+    if trait_ids do
+      traits_query = from(t in LpcManager.PlayerContext.Trait, where: t.id in ^trait_ids)
+      LpcManager.Repo.all(traits_query)
+    else
+      []
+    end
+  end
+
+  @doc """
+  Gets a single trait.
+
+  Raises `Ecto.NoResultsError` if the Trait does not exist.
+
+  ## Examples
+
+      iex> get_trait!(123)
+      %Trait{}
+
+      iex> get_trait!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_trait!(id), do: Repo.get!(Trait, id)
+
+  @doc """
+  Creates a trait.
+
+  ## Examples
+
+      iex> create_trait(%{field: value})
+      {:ok, %Trait{}}
+
+      iex> create_trait(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_trait(attrs \\ %{}) do
+    %Trait{}
+    |> Trait.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a trait.
+
+  ## Examples
+
+      iex> update_trait(trait, %{field: new_value})
+      {:ok, %Trait{}}
+
+      iex> update_trait(trait, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_trait(%Trait{} = trait, attrs) do
+    trait
+    |> Trait.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a trait.
+
+  ## Examples
+
+      iex> delete_trait(trait)
+      {:ok, %Trait{}}
+
+      iex> delete_trait(trait)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_trait(%Trait{} = trait) do
+    Repo.delete(trait)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking trait changes.
+
+  ## Examples
+
+      iex> change_trait(trait)
+      %Ecto.Changeset{data: %Trait{}}
+
+  """
+  def change_trait(%Trait{} = trait, attrs \\ %{}) do
+    Trait.changeset(trait, attrs)
   end
 end

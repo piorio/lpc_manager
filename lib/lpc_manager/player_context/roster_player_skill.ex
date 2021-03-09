@@ -1,4 +1,4 @@
-defmodule LpcManager.RosterPlayerContext.RosterPlayerSkill do
+defmodule LpcManager.PlayerContext.RosterPlayerSkill do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -6,8 +6,8 @@ defmodule LpcManager.RosterPlayerContext.RosterPlayerSkill do
 
   @primary_key false
   schema "roster_players_skills" do
-    belongs_to :roster_player, LpcManager.RosterPlayerContext.RosterPlayer, primary_key: true
-    belongs_to :skill, LpcManager.SkillRules.Skill, primary_key: true
+    belongs_to :roster_player, LpcManager.PlayerContext.RosterPlayer, primary_key: true
+    belongs_to :skill, LpcManager.PlayerContext.Skill, primary_key: true
   end
 
   @doc false

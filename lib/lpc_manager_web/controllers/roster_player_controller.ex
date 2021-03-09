@@ -2,9 +2,7 @@ defmodule LpcManagerWeb.RosterPlayerController do
   use LpcManagerWeb, :controller
 
   alias LpcManager.PlayerContext
-  alias LpcManager.RosterPlayerContext.RosterPlayer
-  alias LpcManager.SkillRules
-  alias LpcManager.TraitRules
+  alias LpcManager.PlayerContext.RosterPlayer
   alias LpcManager.TeamContext
 
   def index(conn, _params) do
@@ -14,11 +12,11 @@ defmodule LpcManagerWeb.RosterPlayerController do
 
   def new(conn, _params) do
     skills_map =
-      SkillRules.list_skills()
+      PlayerContext.list_skills()
       |> Map.new(fn skill -> {skill.name, skill.id} end)
 
     traits_map =
-      TraitRules.list_traits()
+      PlayerContext.list_traits()
       |> Map.new(fn trait -> {trait.name, trait.id} end)
 
     skills_map = Map.put(skills_map, " ", -1)
@@ -47,11 +45,11 @@ defmodule LpcManagerWeb.RosterPlayerController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         skills_map =
-          SkillRules.list_skills()
+          PlayerContext.list_skills()
           |> Map.new(fn skill -> {skill.name, skill.id} end)
 
         traits_map =
-          TraitRules.list_traits()
+          PlayerContext.list_traits()
           |> Map.new(fn trait -> {trait.name, trait.id} end)
 
         skills_map = Map.put(skills_map, " ", -1)
@@ -81,11 +79,11 @@ defmodule LpcManagerWeb.RosterPlayerController do
 
   def edit(conn, %{"id" => id}) do
     skills_map =
-      SkillRules.list_skills()
+      PlayerContext.list_skills()
       |> Map.new(fn skill -> {skill.name, skill.id} end)
 
     traits_map =
-      TraitRules.list_traits()
+      PlayerContext.list_traits()
       |> Map.new(fn trait -> {trait.name, trait.id} end)
 
     skills_map = Map.put(skills_map, " ", -1)
@@ -118,11 +116,11 @@ defmodule LpcManagerWeb.RosterPlayerController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         skills_map =
-          SkillRules.list_skills()
+          PlayerContext.list_skills()
           |> Map.new(fn skill -> {skill.name, skill.id} end)
 
         traits_map =
-          TraitRules.list_traits()
+          PlayerContext.list_traits()
           |> Map.new(fn trait -> {trait.name, trait.id} end)
 
         skills_map = Map.put(skills_map, " ", -1)

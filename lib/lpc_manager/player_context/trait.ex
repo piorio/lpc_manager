@@ -1,4 +1,4 @@
-defmodule LpcManager.TraitRules.Trait do
+defmodule LpcManager.PlayerContext.Trait do
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,4 +1,4 @@
-defmodule LpcManager.RosterPlayerContext.RosterPlayer do
+defmodule LpcManager.PlayerContext.RosterPlayer do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -15,12 +15,12 @@ defmodule LpcManager.RosterPlayerContext.RosterPlayer do
     field :secondary, {:array, :string}
     field :strength, :integer
 
-    many_to_many :skills, LpcManager.SkillRules.Skill,
-      join_through: LpcManager.RosterPlayerContext.RosterPlayerSkill,
+    many_to_many :skills, LpcManager.PlayerContext.Skill,
+      join_through: LpcManager.PlayerContext.RosterPlayerSkill,
       on_replace: :delete
 
-    many_to_many :traits, LpcManager.TraitRules.Trait,
-      join_through: LpcManager.RosterPlayerContext.RosterPlayerTrait,
+    many_to_many :traits, LpcManager.PlayerContext.Trait,
+      join_through: LpcManager.PlayerContext.RosterPlayerTrait,
       on_replace: :delete
 
     belongs_to :roster_teams, LpcManager.TeamContext.RosterTeam, on_replace: :update
