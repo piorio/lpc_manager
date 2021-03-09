@@ -3,9 +3,30 @@ defmodule LpcManagerWeb.RosterTeamControllerTest do
 
   alias LpcManager.RosterTeamContext
 
-  @create_attrs %{apothecary: true, name: "some name", re_roll_cost: 42, re_roll_max: 42, special_rules: "some special_rules", tier: 42}
-  @update_attrs %{apothecary: false, name: "some updated name", re_roll_cost: 43, re_roll_max: 43, special_rules: "some updated special_rules", tier: 43}
-  @invalid_attrs %{apothecary: nil, name: nil, re_roll_cost: nil, re_roll_max: nil, special_rules: nil, tier: nil}
+  @create_attrs %{
+    apothecary: true,
+    name: "some name",
+    re_roll_cost: 42,
+    re_roll_max: 42,
+    special_rules: "some special_rules",
+    tier: 42
+  }
+  @update_attrs %{
+    apothecary: false,
+    name: "some updated name",
+    re_roll_cost: 43,
+    re_roll_max: 43,
+    special_rules: "some updated special_rules",
+    tier: 43
+  }
+  @invalid_attrs %{
+    apothecary: nil,
+    name: nil,
+    re_roll_cost: nil,
+    re_roll_max: nil,
+    special_rules: nil,
+    tier: nil
+  }
 
   def fixture(:roster_team) do
     {:ok, roster_team} = RosterTeamContext.create_roster_team(@create_attrs)
@@ -56,7 +77,9 @@ defmodule LpcManagerWeb.RosterTeamControllerTest do
     setup [:create_roster_team]
 
     test "redirects when data is valid", %{conn: conn, roster_team: roster_team} do
-      conn = put(conn, Routes.roster_team_path(conn, :update, roster_team), roster_team: @update_attrs)
+      conn =
+        put(conn, Routes.roster_team_path(conn, :update, roster_team), roster_team: @update_attrs)
+
       assert redirected_to(conn) == Routes.roster_team_path(conn, :show, roster_team)
 
       conn = get(conn, Routes.roster_team_path(conn, :show, roster_team))
@@ -64,7 +87,9 @@ defmodule LpcManagerWeb.RosterTeamControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, roster_team: roster_team} do
-      conn = put(conn, Routes.roster_team_path(conn, :update, roster_team), roster_team: @invalid_attrs)
+      conn =
+        put(conn, Routes.roster_team_path(conn, :update, roster_team), roster_team: @invalid_attrs)
+
       assert html_response(conn, 200) =~ "Edit Roster team"
     end
   end
@@ -75,6 +100,7 @@ defmodule LpcManagerWeb.RosterTeamControllerTest do
     test "deletes chosen roster_team", %{conn: conn, roster_team: roster_team} do
       conn = delete(conn, Routes.roster_team_path(conn, :delete, roster_team))
       assert redirected_to(conn) == Routes.roster_team_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.roster_team_path(conn, :show, roster_team))
       end

@@ -1,4 +1,4 @@
-defmodule LpcManager.RosterTeamContext.RosterTeam do
+defmodule LpcManager.TeamContext.RosterTeam do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -10,7 +10,7 @@ defmodule LpcManager.RosterTeamContext.RosterTeam do
     field :special_rules, :string
     field :tier, :integer
 
-    belongs_to :race, LpcManager.Rules.Race, on_replace: :update
+    belongs_to :race, LpcManager.RaceContext.Race, on_replace: :update
 
     timestamps()
   end

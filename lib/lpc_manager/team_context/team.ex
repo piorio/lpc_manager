@@ -8,7 +8,7 @@ defmodule LpcManager.TeamContext.Team do
     field :treasury, :integer
 
     belongs_to :user, LpcManager.Users.User
-    belongs_to :roster_team, LpcManager.RosterTeamContext.RosterTeam
+    belongs_to :roster_team, LpcManager.TeamContext.RosterTeam
 
     timestamps()
   end

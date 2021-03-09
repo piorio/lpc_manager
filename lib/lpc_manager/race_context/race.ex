@@ -1,18 +1,17 @@
-defmodule LpcManager.TraitRules.Trait do
+defmodule LpcManager.RaceContext.Race do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "traits" do
-    field :description, :string
+  schema "races" do
     field :name, :string
 
     timestamps()
   end
 
   @doc false
-  def changeset(trait, attrs) do
-    trait
-    |> cast(attrs, [:name, :description])
+  def changeset(race, attrs) do
+    race
+    |> cast(attrs, [:name])
     |> validate_required([:name])
     |> unique_constraint(:name)
   end

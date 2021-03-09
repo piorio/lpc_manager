@@ -1,21 +1,21 @@
 defmodule LpcManagerWeb.TraitController do
   use LpcManagerWeb, :controller
 
-  alias LpcManager.TraitRules
-  alias LpcManager.TraitRules.Trait
+  alias LpcManager.PlayerContext
+  alias LpcManager.PlayerContext.Trait
 
   def index(conn, _params) do
-    traits = TraitRules.list_traits()
+    traits = PlayerContext.list_traits()
     render(conn, "index.html", traits: traits)
   end
 
   def new(conn, _params) do
-    changeset = TraitRules.change_trait(%Trait{})
+    changeset = PlayerContext.change_trait(%Trait{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"trait" => trait_params}) do
-    case TraitRules.create_trait(trait_params) do
+    case PlayerContext.create_trait(trait_params) do
       {:ok, trait} ->
         conn
         |> put_flash(:info, "Trait created successfully.")
@@ -27,20 +27,20 @@ defmodule LpcManagerWeb.TraitController do
   end
 
   def show(conn, %{"id" => id}) do
-    trait = TraitRules.get_trait!(id)
+    trait = PlayerContext.get_trait!(id)
     render(conn, "show.html", trait: trait)
   end
 
   def edit(conn, %{"id" => id}) do
-    trait = TraitRules.get_trait!(id)
-    changeset = TraitRules.change_trait(trait)
+    trait = PlayerContext.get_trait!(id)
+    changeset = PlayerContext.change_trait(trait)
     render(conn, "edit.html", trait: trait, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "trait" => trait_params}) do
-    trait = TraitRules.get_trait!(id)
+    trait = PlayerContext.get_trait!(id)
 
-    case TraitRules.update_trait(trait, trait_params) do
+    case PlayerContext.update_trait(trait, trait_params) do
       {:ok, trait} ->
         conn
         |> put_flash(:info, "Trait updated successfully.")
@@ -52,8 +52,8 @@ defmodule LpcManagerWeb.TraitController do
   end
 
   def delete(conn, %{"id" => id}) do
-    trait = TraitRules.get_trait!(id)
-    {:ok, _trait} = TraitRules.delete_trait(trait)
+    trait = PlayerContext.get_trait!(id)
+    {:ok, _trait} = PlayerContext.delete_trait(trait)
 
     conn
     |> put_flash(:info, "Trait deleted successfully.")
