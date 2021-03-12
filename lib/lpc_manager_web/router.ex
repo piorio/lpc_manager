@@ -40,6 +40,9 @@ defmodule LpcManagerWeb.Router do
 
     resources "/teams", TeamController
     get "/myTeams", TeamController, :index_my_teams
+    get "/myTeams/prepare", TeamController, :prepare_my_team
+    get "/myTeams/dismiss", TeamController, :dismiss_my_team
+    get "/myTeams/manage", TeamController, :manage_my_team
   end
 
   scope "/admin", LpcManagerWeb do

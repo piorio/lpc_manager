@@ -106,8 +106,13 @@ defmodule LpcManager.TeamContext do
     roster_team = get_roster_team!(attrs["roster_team_id"])
 
     %Team{value: 0, user: Pow.Plug.current_user(conn), roster_team: roster_team}
+    |> create_team_initial_values()
     |> Team.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def create_team_initial_values(team) do
+    %Team{team | status: "CREATED", value: 0, re_roll: 0, assistant_coach: 0, cheerleader: 0, apothecary: false, current_team_value: 0}
   end
 
   @doc """
