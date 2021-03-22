@@ -76,9 +76,10 @@ defmodule LpcManagerWeb.TeamController do
     |> redirect(to: Routes.team_path(conn, :index))
   end
 
-  def prepare_my_team(conn, _params) do
-    IO.puts("\n == PREPARE")
-    render(conn, "index_my_teams.html")
+  def prepare_my_team(conn, %{"id" => id}) do
+    team = TeamContext.get_team!(id)
+    changeset = TeamContext.change_team(team)
+    render(conn, "prepare.html", team: team, changeset: changeset)
   end
 
   def dismiss_my_team(conn, _params) do
@@ -88,6 +89,11 @@ defmodule LpcManagerWeb.TeamController do
 
   def manage_my_team(conn, _params) do
     IO.puts("\n == MANAGE")
+    render(conn, "index_my_teams.html")
+  end
+
+  def save_prepare(conn, _params) do
+    IO.puts("\n == SAVE PREPARE")
     render(conn, "index_my_teams.html")
   end
 end

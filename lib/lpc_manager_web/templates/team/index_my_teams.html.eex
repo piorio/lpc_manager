@@ -24,7 +24,7 @@
             <td><%= team.status %></td>
             <td>
               <%= if team.status == "CREATED" do %>
-                <span><%= link "Prepare", to: Routes.team_path(@conn, :prepare_my_team) %></span>
+                <span><%= link "Prepare", to: Routes.team_path(@conn, :prepare_my_team, team.id) %></span>
               <% end %>
               <%= if team.status == "READY" do %>
                 <span><%= link "Manage", to: Routes.team_path(@conn, :manage_my_team) %></span>
