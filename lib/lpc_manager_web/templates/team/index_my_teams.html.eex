@@ -30,9 +30,11 @@
                 <span><%= link "Manage", to: Routes.team_path(@conn, :manage_my_team) %></span>
               <% end %>
               <%= if team.status != "DISMISS" do %>
-                <span><%= link "Dismiss", to: Routes.team_path(@conn, :dismiss_my_team) %></span>
+                <span><%= link "Dismiss", to: Routes.team_path(@conn, :dismiss_my_team, team.id) %></span>
               <% end %>
+              <!--
               <span><%= link "Delete", to: Routes.team_path(@conn, :delete, team), method: :delete, data: [confirm: "Are you sure?"] %></span>
+              -->
             </td>
           </tr>
       <% end %>

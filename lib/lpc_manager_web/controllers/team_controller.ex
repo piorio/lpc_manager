@@ -82,9 +82,20 @@ defmodule LpcManagerWeb.TeamController do
     render(conn, "prepare.html", team: team, changeset: changeset)
   end
 
-  def dismiss_my_team(conn, _params) do
-    IO.puts("\n == DISMISS")
-    render(conn, "index_my_teams.html")
+  def dismiss_my_team(conn, %{"id" => id}) do
+    team = TeamContext.get_team_with_assoc!(id)
+    ready_team = %{
+      "status" => "DISMISS"
+    }
+
+    # Save
+    TeamContext.update_team(team, ready_team)
+
+    # redirect to index
+    teams =
+      Pow.Plug.current_user(conn)
+      |> TeamContext.list_users_teams_with_assoc()
+    render(conn, "index_my_teams.html", teams: teams)
   end
 
   def manage_my_team(conn, _params) do
