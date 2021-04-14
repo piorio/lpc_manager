@@ -44,6 +44,7 @@ defmodule LpcManagerWeb.Router do
     get "/myTeams/dismiss", TeamController, :dismiss_my_team
     get "/myTeams/manage", TeamController, :manage_my_team
     put "/myTeams/save_prepare/:id", TeamController, :save_prepare
+    get "/myTeams/close_prepare/:id", TeamController, :close_prepare
   end
 
   scope "/admin", LpcManagerWeb do

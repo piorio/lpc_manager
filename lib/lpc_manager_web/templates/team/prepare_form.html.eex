@@ -48,4 +48,8 @@
     <%= submit "Save", class: "btn btn-primary" %>
     <%= link "Back", to: Routes.team_path(@conn, :index_my_teams), class: "btn btn-primary" %>
 </div>
+<br>
+<div>
+    <%= link "Close prepare", to: Routes.team_path(@conn, :close_prepare, @team.id), class: "btn btn-primary" %>
+</div>
 <% end %>
