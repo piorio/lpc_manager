@@ -7,8 +7,8 @@
         <th>Name</th>
         <th>Value</th>
         <th>Treasury</th>
-        <th>Coach</th>
         <th>Roster</th>
+        <th>Status</th>
         <th></th>
       </tr>
     </thead>
@@ -20,11 +20,21 @@
             </td>
             <td><%= team.value %></td>
             <td><%= team.treasury %></td>
-            <td><%= team.user.coach_name %></td>
             <td><%= team.roster_team.name%></td>
+            <td><%= team.status %></td>
             <td>
-              <span><%= link "Edit", to: Routes.team_path(@conn, :edit, team) %></span>
+              <%= if team.status == "CREATED" do %>
+                <span><%= link "Prepare", to: Routes.team_path(@conn, :prepare_my_team, team.id) %></span>
+              <% end %>
+              <%= if team.status == "READY" do %>
+                <span><%= link "Manage", to: Routes.team_path(@conn, :manage_my_team) %></span>
+              <% end %>
+              <%= if team.status != "DISMISS" do %>
+                <span><%= link "Dismiss", to: Routes.team_path(@conn, :dismiss_my_team, team.id) %></span>
+              <% end %>
+              <!--
               <span><%= link "Delete", to: Routes.team_path(@conn, :delete, team), method: :delete, data: [confirm: "Are you sure?"] %></span>
+              -->
             </td>
           </tr>
       <% end %>

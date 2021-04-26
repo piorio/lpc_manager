@@ -106,8 +106,13 @@ defmodule LpcManager.TeamContext do
     roster_team = get_roster_team!(attrs["roster_team_id"])
 
     %Team{value: 0, user: Pow.Plug.current_user(conn), roster_team: roster_team}
+    |> create_team_initial_values()
     |> Team.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def create_team_initial_values(team) do
+    %Team{team | status: "CREATED", value: 0, re_roll: 0, assistant_coach: 0, cheerleader: 0, apothecary: false, current_team_value: 0}
   end
 
   @doc """
@@ -236,5 +241,37 @@ defmodule LpcManager.TeamContext do
   """
   def change_roster_team(%RosterTeam{} = roster_team, attrs \\ %{}) do
     RosterTeam.changeset(roster_team, attrs)
+  end
+
+  def validate_reroll_number(%LpcManager.TeamContext.Team{roster_team: roster_team}, %{"re_roll" => bought_reroll_string}) do
+    {bought_reroll, _ } = Integer.parse(bought_reroll_string)
+    bought_reroll <= roster_team.re_roll_max
+  end
+
+  def validate_apothecary(%LpcManager.TeamContext.Team{roster_team: roster_team}, %{"apothecary" => apothecary}) do
+    need_apothecary = String.to_existing_atom(apothecary)
+    case {roster_team.apothecary, need_apothecary} do
+      {false, false} -> true
+      {false, true} -> false
+      {_, _} -> true
+    end
+  end
+
+  def validate_money_spent(%LpcManager.TeamContext.Team{treasury: treasury}, spent) do
+    spent <= treasury
+  end
+
+  def get_money_spent(%LpcManager.TeamContext.Team{roster_team: roster_team, treasury: treasury}, teams_param) do
+    apothecary_spent =  case String.to_existing_atom(teams_param["apothecary"]) do
+      true -> 50000
+      false -> 0
+    end
+    {re_roll_spent, _} = Integer.parse(teams_param["re_roll"])
+    {assistan_coach_spent, _} = Integer.parse(teams_param["assistant_coach"])
+    {cheerleader_spent, _} = Integer.parse(teams_param["cheerleader"])
+
+    spent = (re_roll_spent * roster_team.re_roll_cost) + (assistan_coach_spent * 10000) + (cheerleader_spent * 10000)
+
+    {spent, (treasury - spent)}
   end
 end

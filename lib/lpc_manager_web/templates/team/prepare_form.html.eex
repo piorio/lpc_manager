@@ -1,0 +1,55 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <br>
+  To preapre your team you have <b><%= @team.treasury %></b> treasury available
+  <br>
+  <hr>
+
+<div class="form-group">
+  <%= label f, :re_roll, class: "col-sm-2 col-form-label col-form-label-lg" %>
+</div>
+<div class="form-group">
+  <%= text_input f, :re_roll, class: "form-control form-control-lg", placeholder: "How many re rolls?" %>
+</div>
+<%= error_tag f, :re_roll %>
+
+<div class="form-group">
+  <%= label f, :assistant_coach, class: "col-sm-2 col-form-label col-form-label-lg" %>
+</div>
+<div class="form-group">
+  <%= number_input f, :assistant_coach, class: "form-control form-control-lg", placeholder: "How many assistant coaches?" %>
+</div>
+<%= error_tag f, :assistant_coach %>
+
+<div class="form-group">
+  <%= label f, :cheerleader, class: "col-sm-2 col-form-label col-form-label-lg" %>
+</div>
+<div class="form-group">
+  <%= number_input f, :cheerleader, class: "form-control form-control-lg", placeholder: "How many cheerleaders?" %>
+</div>
+<%= error_tag f, :cheerleader %>
+
+<div class="form-group">
+  <%= label f, :apothecary, class: "col-sm-2 col-form-label col-form-label-lg" %>
+</div>
+<div class="form-group">
+  <%= checkbox f, :apothecary, class: "form-control form-control-lg", placeholder: "How many cheerleaders?" %>
+</div>
+<%= error_tag f, :apothecary %>
+
+<br>
+
+<div>
+    <%= submit "Save", class: "btn btn-primary" %>
+    <%= link "Back", to: Routes.team_path(@conn, :index_my_teams), class: "btn btn-primary" %>
+</div>
+<br>
+<div>
+    <%= link "Close prepare", to: Routes.team_path(@conn, :close_prepare, @team.id), class: "btn btn-primary" %>
+</div>
+<% end %>
