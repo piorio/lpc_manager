@@ -57,6 +57,7 @@ defmodule LpcManagerWeb.Router do
     resources "/skills", SkillController
     resources "/roster_players", RosterPlayerController
     resources "/roster_teams", RosterTeamController
+    resources "/players", PlayerController
   end
 
   # Other scopes may use custom stacks.

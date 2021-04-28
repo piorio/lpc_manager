@@ -1,0 +1,78 @@
+<h1>Show Player</h1>
+
+<ul>
+
+  <li>
+    <strong>Hiring fee:</strong>
+    <%= @player.hiring_fee %>
+  </li>
+
+  <li>
+    <strong>Current value:</strong>
+    <%= @player.current_value %>
+  </li>
+
+  <li>
+    <strong>Movement allowance:</strong>
+    <%= @player.movement_allowance %>
+  </li>
+
+  <li>
+    <strong>Strength:</strong>
+    <%= @player.strength %>
+  </li>
+
+  <li>
+    <strong>Agility:</strong>
+    <%= @player.agility %>
+  </li>
+
+  <li>
+    <strong>Passing:</strong>
+    <%= @player.passing %>
+  </li>
+
+  <li>
+    <strong>Armour value:</strong>
+    <%= @player.armour_value %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @player.name %>
+  </li>
+
+  <li>
+    <strong>Number:</strong>
+    <%= @player.number %>
+  </li>
+
+  <li>
+    <strong>Unspent spp:</strong>
+    <%= @player.unspent_spp %>
+  </li>
+
+  <li>
+    <strong>Total spp:</strong>
+    <%= @player.total_spp %>
+  </li>
+
+  <li>
+    <strong>Missing next game:</strong>
+    <%= @player.missing_next_game %>
+  </li>
+
+  <li>
+    <strong>Injury:</strong>
+    <%= @player.injury %>
+  </li>
+
+  <li>
+    <strong>Temp retiring:</strong>
+    <%= @player.temp_retiring %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.player_path(@conn, :edit, @player) %></span>
+<span><%= link "Back", to: Routes.player_path(@conn, :index) %></span>

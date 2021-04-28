@@ -51,3 +51,8 @@ TEAM UI
 <span><%= link "Edit", to: Routes.team_path(@conn, :edit, team) %></span>
 <span><%= link "Delete", to: Routes.team_path(@conn, :delete, team), method: :delete, data: [confirm: "Are you sure?"] %></span>
 <span><%= link "Edit", to: Routes.team_path(@conn, :edit, @team) %></span>
+
+
+
+
+mix phx.gen.html PlayerContext Player players hiring_fee:integer current_value:integer movement_allowance:integer strength:integer agility:integer passing:integer armour_value:integer name:string number:integer roster_player_id:references:roster_players team_id:references:teams unspent_spp:integer total_spp:integer

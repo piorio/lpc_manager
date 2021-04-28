@@ -1,0 +1,52 @@
+<h1>Listing Players</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hiring fee</th>
+      <th>Current value</th>
+      <th>Movement allowance</th>
+      <th>Strength</th>
+      <th>Agility</th>
+      <th>Passing</th>
+      <th>Armour value</th>
+      <th>Name</th>
+      <th>Number</th>
+      <th>Unspent spp</th>
+      <th>Total spp</th>
+      <th>Missing next game</th>
+      <th>Injury</th>
+      <th>Temp retiring</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for player <- @players do %>
+    <tr>
+      <td><%= player.hiring_fee %></td>
+      <td><%= player.current_value %></td>
+      <td><%= player.movement_allowance %></td>
+      <td><%= player.strength %></td>
+      <td><%= player.agility %></td>
+      <td><%= player.passing %></td>
+      <td><%= player.armour_value %></td>
+      <td><%= player.name %></td>
+      <td><%= player.number %></td>
+      <td><%= player.unspent_spp %></td>
+      <td><%= player.total_spp %></td>
+      <td><%= player.missing_next_game %></td>
+      <td><%= player.injury %></td>
+      <td><%= player.temp_retiring %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.player_path(@conn, :show, player) %></span>
+        <span><%= link "Edit", to: Routes.player_path(@conn, :edit, player) %></span>
+        <span><%= link "Delete", to: Routes.player_path(@conn, :delete, player), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Player", to: Routes.player_path(@conn, :new) %></span>

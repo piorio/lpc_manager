@@ -1,0 +1,67 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :hiring_fee %>
+  <%= number_input f, :hiring_fee %>
+  <%= error_tag f, :hiring_fee %>
+
+  <%= label f, :current_value %>
+  <%= number_input f, :current_value %>
+  <%= error_tag f, :current_value %>
+
+  <%= label f, :movement_allowance %>
+  <%= number_input f, :movement_allowance %>
+  <%= error_tag f, :movement_allowance %>
+
+  <%= label f, :strength %>
+  <%= number_input f, :strength %>
+  <%= error_tag f, :strength %>
+
+  <%= label f, :agility %>
+  <%= number_input f, :agility %>
+  <%= error_tag f, :agility %>
+
+  <%= label f, :passing %>
+  <%= number_input f, :passing %>
+  <%= error_tag f, :passing %>
+
+  <%= label f, :armour_value %>
+  <%= number_input f, :armour_value %>
+  <%= error_tag f, :armour_value %>
+
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+
+  <%= label f, :number %>
+  <%= number_input f, :number %>
+  <%= error_tag f, :number %>
+
+  <%= label f, :unspent_spp %>
+  <%= number_input f, :unspent_spp %>
+  <%= error_tag f, :unspent_spp %>
+
+  <%= label f, :total_spp %>
+  <%= number_input f, :total_spp %>
+  <%= error_tag f, :total_spp %>
+
+  <%= label f, :missing_next_game %>
+  <%= checkbox f, :missing_next_game %>
+  <%= error_tag f, :missing_next_game %>
+
+  <%= label f, :injury %>
+  <%= number_input f, :injury %>
+  <%= error_tag f, :injury %>
+
+  <%= label f, :temp_retiring %>
+  <%= checkbox f, :temp_retiring %>
+  <%= error_tag f, :temp_retiring %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>
