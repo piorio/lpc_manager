@@ -6,9 +6,54 @@ defmodule LpcManager.PlayerContextTest do
   describe "players" do
     alias LpcManager.PlayerContext.Player
 
-    @valid_attrs %{agility: 42, armour_value: 42, current_value: 42, hiring_fee: 42, injury: 42, missing_next_game: true, movement_allowance: 42, name: "some name", number: 42, passing: 42, strength: 42, temp_retiring: true, total_spp: 42, unspent_spp: 42}
-    @update_attrs %{agility: 43, armour_value: 43, current_value: 43, hiring_fee: 43, injury: 43, missing_next_game: false, movement_allowance: 43, name: "some updated name", number: 43, passing: 43, strength: 43, temp_retiring: false, total_spp: 43, unspent_spp: 43}
-    @invalid_attrs %{agility: nil, armour_value: nil, current_value: nil, hiring_fee: nil, injury: nil, missing_next_game: nil, movement_allowance: nil, name: nil, number: nil, passing: nil, strength: nil, temp_retiring: nil, total_spp: nil, unspent_spp: nil}
+    @valid_attrs %{
+      agility: 42,
+      armour_value: 42,
+      current_value: 42,
+      hiring_fee: 42,
+      injury: 42,
+      missing_next_game: true,
+      movement_allowance: 42,
+      name: "some name",
+      number: 42,
+      passing: 42,
+      strength: 42,
+      temp_retiring: true,
+      total_spp: 42,
+      unspent_spp: 42
+    }
+    @update_attrs %{
+      agility: 43,
+      armour_value: 43,
+      current_value: 43,
+      hiring_fee: 43,
+      injury: 43,
+      missing_next_game: false,
+      movement_allowance: 43,
+      name: "some updated name",
+      number: 43,
+      passing: 43,
+      strength: 43,
+      temp_retiring: false,
+      total_spp: 43,
+      unspent_spp: 43
+    }
+    @invalid_attrs %{
+      agility: nil,
+      armour_value: nil,
+      current_value: nil,
+      hiring_fee: nil,
+      injury: nil,
+      missing_next_game: nil,
+      movement_allowance: nil,
+      name: nil,
+      number: nil,
+      passing: nil,
+      strength: nil,
+      temp_retiring: nil,
+      total_spp: nil,
+      unspent_spp: nil
+    }
 
     def player_fixture(attrs \\ %{}) do
       {:ok, player} =

@@ -20,13 +20,45 @@ defmodule LpcManager.PlayerContext.Player do
     field :roster_player_id, :id
     field :team_id, :id
 
+    belongs_to :teams, LpcManager.TeamContext.Team, on_replace: :update
+
     timestamps()
   end
 
   @doc false
   def changeset(player, attrs) do
     player
-    |> cast(attrs, [:hiring_fee, :current_value, :movement_allowance, :strength, :agility, :passing, :armour_value, :name, :number, :unspent_spp, :total_spp, :missing_next_game, :injury, :temp_retiring])
-    |> validate_required([:hiring_fee, :current_value, :movement_allowance, :strength, :agility, :passing, :armour_value, :name, :number, :unspent_spp, :total_spp, :missing_next_game, :injury, :temp_retiring])
+    |> cast(attrs, [
+      :hiring_fee,
+      :current_value,
+      :movement_allowance,
+      :strength,
+      :agility,
+      :passing,
+      :armour_value,
+      :name,
+      :number,
+      :unspent_spp,
+      :total_spp,
+      :missing_next_game,
+      :injury,
+      :temp_retiring
+    ])
+    |> validate_required([
+      :hiring_fee,
+      :current_value,
+      :movement_allowance,
+      :strength,
+      :agility,
+      :passing,
+      :armour_value,
+      :name,
+      :number,
+      :unspent_spp,
+      :total_spp,
+      :missing_next_game,
+      :injury,
+      :temp_retiring
+    ])
   end
 end

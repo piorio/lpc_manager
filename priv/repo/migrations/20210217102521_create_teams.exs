@@ -14,5 +14,6 @@ defmodule LpcManager.Repo.Migrations.CreateTeams do
 
     create index(:teams, [:user_id])
     create index(:teams, [:roster_team_id])
+    create unique_index(:teams, [:name])
   end
 end

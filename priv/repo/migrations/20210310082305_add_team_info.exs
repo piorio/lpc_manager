@@ -11,6 +11,4 @@ defmodule LpcManager.Repo.Migrations.AddTeamInfo do
       add :current_team_value, :integer
     end
   end
-
-  create unique_index(:teams, [:name])
 end

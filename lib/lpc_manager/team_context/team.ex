@@ -22,7 +22,17 @@ defmodule LpcManager.TeamContext.Team do
   @doc false
   def changeset(team, attrs) do
     team
-    |> cast(attrs, [:name, :value, :treasury, :status, :re_roll, :assistant_coach, :cheerleader, :apothecary, :current_team_value])
+    |> cast(attrs, [
+      :name,
+      :value,
+      :treasury,
+      :status,
+      :re_roll,
+      :assistant_coach,
+      :cheerleader,
+      :apothecary,
+      :current_team_value
+    ])
     |> validate_required([:name, :value, :treasury, :status])
     |> unique_constraint(:name)
     |> validate_inclusion(:status, ~w(CREATED READY DISMISS))

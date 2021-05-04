@@ -46,11 +46,11 @@ defmodule LpcManagerWeb.TeamController do
   def edit(conn, %{"id" => id}) do
     # TODO: at the moment I don't know how and who could EDIT a team
 
-    #team = TeamContext.get_team!(id)
-    #changeset = TeamContext.change_team(team)
+    # team = TeamContext.get_team!(id)
+    # changeset = TeamContext.change_team(team)
 
     # Can't pass roster_teams because edit team will never change the roster team
-    #render(conn, "edit.html", team: team, changeset: changeset)
+    # render(conn, "edit.html", team: team, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "team" => team_params}) do
@@ -84,6 +84,7 @@ defmodule LpcManagerWeb.TeamController do
 
   def dismiss_my_team(conn, %{"id" => id}) do
     team = TeamContext.get_team_with_assoc!(id)
+
     ready_team = %{
       "status" => "DISMISS"
     }
@@ -95,6 +96,7 @@ defmodule LpcManagerWeb.TeamController do
     teams =
       Pow.Plug.current_user(conn)
       |> TeamContext.list_users_teams_with_assoc()
+
     render(conn, "index_my_teams.html", teams: teams)
   end
 
@@ -112,23 +114,23 @@ defmodule LpcManagerWeb.TeamController do
     # Check re roll
     if !TeamContext.validate_reroll_number(team, team_params) do
       conn
-        |> put_flash(:error, "You cannot buy so many re roll!!")
-        |> redirect(to: Routes.team_path(conn, :prepare_my_team, team.id))
+      |> put_flash(:error, "You cannot buy so many re roll!!")
+      |> redirect(to: Routes.team_path(conn, :prepare_my_team, team.id))
     end
 
     # Check apothecary
     if !TeamContext.validate_apothecary(team, team_params) do
       conn
-        |> put_flash(:error, "You cannot buy apothecary!!")
-        |> redirect(to: Routes.team_path(conn, :prepare_my_team, team.id))
+      |> put_flash(:error, "You cannot buy apothecary!!")
+      |> redirect(to: Routes.team_path(conn, :prepare_my_team, team.id))
     end
 
     {spent, new_treasury} = TeamContext.get_money_spent(team, team_params)
     # Check spent
     if !TeamContext.validate_money_spent(team, spent) do
       conn
-        |> put_flash(:error, "You spent too much money!!")
-        |> redirect(to: Routes.team_path(conn, :prepare_my_team, team.id))
+      |> put_flash(:error, "You spent too much money!!")
+      |> redirect(to: Routes.team_path(conn, :prepare_my_team, team.id))
     end
 
     IO.puts("SPENT - NEW TREASURY")
@@ -145,6 +147,7 @@ defmodule LpcManagerWeb.TeamController do
       "re_roll" => team_params["re_roll"],
       "treasury" => new_treasury
     }
+
     IO.inspect(team_update_map)
 
     # Save
@@ -154,11 +157,13 @@ defmodule LpcManagerWeb.TeamController do
     teams =
       Pow.Plug.current_user(conn)
       |> TeamContext.list_users_teams_with_assoc()
+
     render(conn, "index_my_teams.html", teams: teams)
   end
 
   def close_prepare(conn, %{"id" => id}) do
     team = TeamContext.get_team_with_assoc!(id)
+
     ready_team = %{
       "status" => "READY"
     }
@@ -170,6 +175,7 @@ defmodule LpcManagerWeb.TeamController do
     teams =
       Pow.Plug.current_user(conn)
       |> TeamContext.list_users_teams_with_assoc()
+
     render(conn, "index_my_teams.html", teams: teams)
   end
 end
